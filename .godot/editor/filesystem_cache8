@@ -1,0 +1,13 @@
+2a60927148abd1d33b818b535e306557
+::res://::1678803293
+icon.svg::CompressedTexture2D::7279441483633488697::1678800450::1678800460::1::::<><>::
+HealthComponent.gd::GDScript::-1::1678803263::0::1::::<>Node2D<>::
+Piece.gd::GDScript::-1::1678802758::0::1::::<>Node2D<>::
+HealthComponent.tscn::PackedScene::5598311466827102627::1678803293::0::1::::<><>::res://HealthComponent.gd
+Piece.tscn::PackedScene::1393380286178639880::1678803162::0::1::::<><>::res://Piece.gd
+Label.gd::GDScript::-1::1678802808::0::1::::<>Label<>::
+HealthDisplay.gd::GDScript::-1::1678803256::0::1::::<>Label<>::
+health_display.tscn::PackedScene::7840985876452165546::1678803263::0::1::::<><>::res://HealthDisplay.gd
+::res://PieceScripts/::1678801788
+::res://PieceScripts/Pawn/::1678801793
+data.json::JSON::-1::1678801805::0::1::::<><>::

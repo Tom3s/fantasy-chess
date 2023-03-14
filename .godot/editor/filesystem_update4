@@ -1,0 +1,13 @@
+res://HealthComponent.gd
+res://Piece.gd
+res://HealthComponent.tscn
+res://Piece.tscn
+res://Label.gd
+res://Display.gd
+res://HealthDisplay.gd
+res://HealthDisplay.tscn
+res://MoveComponent.gd
+res://PieceScripts/Pawn/MoveComponent.gd
+res://TargetLocation.gd
+res://MoveComponent.tscn
+res://PieceScripts/Pawn/MovementScript.gd
