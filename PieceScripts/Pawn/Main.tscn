@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://c1o08i0yslxoc"]
+
+[ext_resource type="Script" path="res://Piece.gd" id="1_yk3lb"]
+[ext_resource type="Script" path="res://PieceScripts/Pawn/Camera2D.gd" id="2_vup5v"]
+
+[node name="Main" type="Node2D"]
+
+[node name="Piece" type="Node2D" parent="."]
+script = ExtResource("1_yk3lb")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+script = ExtResource("2_vup5v")

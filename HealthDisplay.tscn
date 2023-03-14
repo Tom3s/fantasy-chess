@@ -3,6 +3,17 @@
 [ext_resource type="Script" path="res://HealthDisplay.gd" id="1_h4yfs"]
 
 [node name="HealthDisplay" type="Label"]
-offset_right = 40.0
-offset_bottom = 23.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -576.0
+offset_top = -324.0
+offset_right = -575.0
+offset_bottom = -301.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1
 script = ExtResource("1_h4yfs")

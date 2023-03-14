@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bx4j3bpfhc0fb"]
+
+[ext_resource type="Script" path="res://PieceGraphic.gd" id="1_ts5dj"]
+
+[node name="PieceGraphic" type="Node"]
+script = ExtResource("1_ts5dj")

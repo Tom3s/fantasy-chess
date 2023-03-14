@@ -21,15 +21,6 @@ func init(movementClassPath: String, initialPosition: Vector2i):
 
 	movementClass = load(movementClassPath)
 
-	# var temp = movementClass.getAvailableMoves(position, MAX_MOVES)
-
-	# print(temp)
-
-	# classAvailableMoves = Callable(movementClass, "getAvailableMoves")
-	# print(classAvailableMoves)
-	# classAvailableAttacks = Callable(movementClass, "getAvailableAttacks")
-	# classCalculateCost = Callable(movementClass, "calculateCost")
-
 func getAvailableMoves(maxCost: int) -> Array[TargetLocation]:
 	return movementClass.getAvailableMoves(position, maxCost)
 

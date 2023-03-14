@@ -61,5 +61,8 @@ func isHealthFull() -> bool:
 func isDead() -> bool:
 	return is_zero_approx(currentHealth) || currentHealth < 0
 
+func addHealthBarOffset(offset: Vector2) -> void:
+	healthDisplay.setOffset(offset)
+
 
 	

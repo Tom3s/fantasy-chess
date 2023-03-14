@@ -11,3 +11,10 @@ res://PieceScripts/Pawn/MoveComponent.gd
 res://TargetLocation.gd
 res://MoveComponent.tscn
 res://PieceScripts/Pawn/MovementScript.gd
+res://PieceGraphic.gd
+res://PieceGraphic.tscn
+res://PieceScripts/Pawn/Graphic.gd
+res://PieceScripts/Pawn/Graphic.tscn
+res://PieceShader.gdshader
+res://PieceScripts/Pawn/Main.tscn
+res://PieceScripts/Pawn/Camera2D.gd

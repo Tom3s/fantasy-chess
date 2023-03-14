@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://h6a2sbwnla7k"]
+
+[ext_resource type="Script" path="res://PieceScripts/Pawn/Graphic.gd" id="1_wjp3w"]
+
+[node name="Graphic" type="Polygon2D"]
+rotation = -6.28319
+script = ExtResource("1_wjp3w")
