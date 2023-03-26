@@ -38,5 +38,5 @@ func _ready():
 
 func _draw():
     for i in polygon.size() - 1:
-        draw_line(polygon[i], polygon[i + 1], Color.BLACK, 5, true)
-    draw_line(polygon[-1], polygon[0], Color.BLACK, 5, true)
+        draw_line(polygon[i], polygon[i + 1], Color.BLACK, 5, false)
+    draw_line(polygon[-1], polygon[0], Color.BLACK, 5, false)

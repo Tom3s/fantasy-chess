@@ -1,12 +1,12 @@
 extends Camera2D
 
-var _targetZoom: float = 1.0
+var _targetZoom: float = 0.35
 
 @export_range(0.05, 0.2, 0.05)
 var MIN_ZOOM: float = 0.15
 @export_range(1.0, 5.0, 0.1)
 var MAX_ZOOM: float = 3.0
-const ZOOM_INCREMENT: float = 0.1
+const ZOOM_INCREMENT: float = 0.15
 const ZOOM_RATE: float = 8.0
 
 # Called when the node enters the scene tree for the first time.

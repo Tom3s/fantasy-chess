@@ -1,7 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://mjutkaitgril"]
+[gd_scene load_steps=4 format=3 uid="uid://c1o08i0yslxoc"]
 
 [ext_resource type="Script" path="res://Piece.gd" id="1_yk3lb"]
-[ext_resource type="Script" path="res://Camera2D.gd" id="2_v8qub"]
+[ext_resource type="Script" path="res://PieceScripts/Pawn/Camera2D.gd" id="2_vup5v"]
 [ext_resource type="PackedScene" uid="uid://lorewu3d2211" path="res://Board.tscn" id="3_sq1xj"]
 
 [node name="Main" type="Node2D"]
@@ -10,9 +10,6 @@
 script = ExtResource("1_yk3lb")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-script = ExtResource("2_v8qub")
-MIN_ZOOM = 0.2
-MAX_ZOOM = 4.0
+script = ExtResource("2_vup5v")
 
 [node name="Board" parent="." instance=ExtResource("3_sq1xj")]
-z_index = -2
