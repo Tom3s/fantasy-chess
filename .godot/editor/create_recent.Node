@@ -3,6 +3,5 @@ Node2D
 Camera2D
 Piece
 Polygon2D
-Node
 ColorRect
 Label
