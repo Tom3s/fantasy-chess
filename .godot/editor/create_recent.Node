@@ -1,9 +1,7 @@
-SubViewport
+Sprite2D
 Node2D
-Node
 Camera2D
 Piece
-Sprite2D
 Polygon2D
 ColorRect
 Label

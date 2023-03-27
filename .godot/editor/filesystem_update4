@@ -4,6 +4,9 @@ res://Piece.tscn
 res://MoveComponent.tscn
 res://PieceGraphic.tscn
 res://PieceScripts/Pawn/Graphic.tscn
-res://Board.tscn
-res://HealthDisplay.tscn
-res://HealthDisplay.gd
+res://PieceGraphic.gd
+res://Piece.gd
+res://PieceScripts/Pawn/Graphic.gd
+res://PieceScripts/Pawn/SignedDistanceField.gdshader
+res://PieceShader.gdshader
+res://SignedDistanceField.gdshader
