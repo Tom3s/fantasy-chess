@@ -3,24 +3,27 @@ extends Node
 # class_name PawnMovement
 # var TargetLocation := load("res://TargetLocation.gd") as TargetLocation
 
-static func getAvailableMoves(position: Vector2i, maxCost: int) -> Array[TargetLocation]:
-    var availableMoves: Array[TargetLocation] = []
-    for i in range(-maxCost, maxCost + 1):
+static func getAvailableMoves(position: Vector2i, maxCost: int) -> Array[Vector2i]:
+    print("getAvailableMoves called from movescript", position)
+    var availableMoves: Array[Vector2i] = []
+    for i in range(position.y - maxCost, position.y + maxCost + 1):
         if i == position.y:
             continue
         
         var targetPosition := Vector2i(position.x, i)
-        var targetLocation := TargetLocation.init(targetPosition, calculateCost(position, targetPosition))
 
-        availableMoves.append(targetLocation)
+        availableMoves.append(targetPosition)
     
+    
+    print("Available moves from movescript: ", availableMoves)
+
     return availableMoves
 
-static func getAvailableAttacks(position: Vector2i) -> Array[TargetLocation]:
-    var availableAttacks: Array[TargetLocation] = []
+static func getAvailableAttacks(position: Vector2i) -> Array[Vector2i]:
+    var availableAttacks: Array[Vector2i] = []
     for x in [-1, 1]:
         for y in [-1, 1]:
-            var targetPosition := TargetLocation.init(Vector2i(position.x + x, position.y + y), 1, true)
+            var targetPosition := Vector2i(position.x + x, position.y + y)
             availableAttacks.append(targetPosition)
     
     return availableAttacks

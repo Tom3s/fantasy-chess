@@ -4,3 +4,5 @@
 
 [node name="Board" type="Node2D"]
 script = ExtResource("1_tx4oi")
+width = 18
+height = 16

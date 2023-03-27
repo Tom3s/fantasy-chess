@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://bnal0y6bld4jd" path="res://PieceScripts/Pawn/Pawn.png" id="2_jo7cf"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_f34yj"]
+resource_local_to_scene = true
 shader = ExtResource("1_acqh1")
 shader_parameter/thickness = 0.685
 shader_parameter/softness = 0.008
@@ -15,6 +16,6 @@ shader_parameter/outline_softness = 0.008
 
 [node name="Graphic" type="Sprite2D"]
 material = SubResource("ShaderMaterial_f34yj")
-position = Vector2(21, 33)
 texture = ExtResource("2_jo7cf")
+centered = false
 script = ExtResource("1_wjp3w")

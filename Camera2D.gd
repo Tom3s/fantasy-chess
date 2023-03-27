@@ -1,5 +1,7 @@
 extends Camera2D
 
+class_name Camera
+
 var _targetZoom: float = 0.35
 
 @export_range(0.05, 0.2, 0.05)
@@ -35,3 +37,6 @@ func _zoomIn() -> void:
 	
 func _zoomOut() -> void:
 	_targetZoom = max(_targetZoom - ZOOM_INCREMENT, MIN_ZOOM)
+
+func setCameraPosition(newPosition: Vector2) -> void:
+	position = newPosition
