@@ -38,11 +38,11 @@ func _process(delta):
 	parentPiece.position = lerp(parentPiece.position, parentTargetPosition, MOVEMENT_SPEED * delta)
 
 
-func getAvailableMoves(maxCost: int) -> Array[Vector2i]:
-	return movementClass.getAvailableMoves(localPosition, maxCost)
+func getAvailableMoves(maxCost: int, occupiedTiles: Array[Vector2i]) -> Array[Vector2i]:
+	return movementClass.getAvailableMoves(localPosition, maxCost, occupiedTiles)
 
-func getAvailableAttacks() -> Array[Vector2i]:
-	return movementClass.getAvailableAttacks(localPosition)
+func getAvailableAttacks(enemyOccupiedTiles: Array[Vector2i]) -> Array[Vector2i]:
+	return movementClass.getAvailableAttacks(localPosition, enemyOccupiedTiles)
 
 func calculateCost(targetPosition: Vector2i) -> int:
 	return movementClass.calculateCost(localPosition, targetPosition)

@@ -33,6 +33,7 @@ var offsetY: int = 0
 const padding = 5
 var hoveringSquare: Vector2i = Vector2i(-1, -1)
 var reachableTiles: Array[Vector2i] = []
+var attackableTiles: Array[Vector2i] = []
 
 
 func _draw() -> void:
@@ -52,6 +53,14 @@ func _draw() -> void:
 		
 		# draw_rect(Rect2(posX, posY, GlobalVariables.GRID_SIZE - padding*2, GlobalVariables.GRID_SIZE - padding*2), Color.DARK_OLIVE_GREEN, false, padding * 2)
 		draw_rect(Rect2(posX, posY, GlobalVariables.GRID_SIZE, GlobalVariables.GRID_SIZE), Color(0.0, 0.8, 0.2, 0.5))
+	
+	
+	for tile in attackableTiles:
+		var posX = tile.x * GlobalVariables.GRID_SIZE - offsetX # + padding
+		var posY = tile.y * GlobalVariables.GRID_SIZE - offsetY # + padding
+		
+		# draw_rect(Rect2(posX, posY, GlobalVariables.GRID_SIZE - padding*2, GlobalVariables.GRID_SIZE - padding*2), Color.DARK_OLIVE_GREEN, false, padding * 2)
+		draw_rect(Rect2(posX, posY, GlobalVariables.GRID_SIZE, GlobalVariables.GRID_SIZE), Color(0.8, 0.1, 0.2, 0.5))
 	
 	if hoveringSquare != Vector2i(-1, -1):
 		var posX = hoveringSquare.x * GlobalVariables.GRID_SIZE - offsetX + padding
@@ -91,8 +100,14 @@ func setReachableTiles(tiles: Array[Vector2i]) -> void:
 	reachableTiles = tiles.filter(GlobalVariables.isTilePositionValid)
 	queue_redraw()
 
-func clearReachableTiles() -> void:
+func setAttackableTiles(tiles: Array[Vector2i]) -> void:
+	
+	attackableTiles = tiles.filter(GlobalVariables.isTilePositionValid)
+	queue_redraw()
+
+func clearInteractableTiles() -> void:
 	reachableTiles.clear()
+	attackableTiles.clear()
 	queue_redraw()
 
 func debugReachableTiles() -> String:

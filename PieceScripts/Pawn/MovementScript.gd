@@ -3,28 +3,31 @@ extends Node
 # class_name PawnMovement
 # var TargetLocation := load("res://TargetLocation.gd") as TargetLocation
 
-static func getAvailableMoves(position: Vector2i, maxCost: int) -> Array[Vector2i]:
-    print("getAvailableMoves called from movescript", position)
+static func getAvailableMoves(position: Vector2i, maxCost: int, occupiedTiles: Array[Vector2i]) -> Array[Vector2i]:
     var availableMoves: Array[Vector2i] = []
-    for i in range(position.y - maxCost, position.y + maxCost + 1):
-        if i == position.y:
-            continue
-        
+    for i in range(position.y - 1, position.y - maxCost - 1, -1):
         var targetPosition := Vector2i(position.x, i)
-
+        if targetPosition in occupiedTiles:
+            break
+        availableMoves.append(targetPosition)
+    
+    for i in range(position.y + 1, position.y + maxCost + 1):
+        var targetPosition := Vector2i(position.x, i)
+        if targetPosition in occupiedTiles:
+            break
         availableMoves.append(targetPosition)
     
     
-    print("Available moves from movescript: ", availableMoves)
 
     return availableMoves
 
-static func getAvailableAttacks(position: Vector2i) -> Array[Vector2i]:
+static func getAvailableAttacks(position: Vector2i, enemyOccupiedTiles: Array[Vector2i]) -> Array[Vector2i]:
     var availableAttacks: Array[Vector2i] = []
     for x in [-1, 1]:
         for y in [-1, 1]:
             var targetPosition := Vector2i(position.x + x, position.y + y)
-            availableAttacks.append(targetPosition)
+            if targetPosition in enemyOccupiedTiles:
+                availableAttacks.append(targetPosition)
     
     return availableAttacks
 

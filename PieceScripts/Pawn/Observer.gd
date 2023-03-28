@@ -44,6 +44,9 @@ func connectSignals():
 		player.pieceUnselected.connect(onPlayer_pieceUnselected)
 		player.invalidTargetTile.connect(onPlayer_invalidTargetTile)
 		player.targetTileNotReachable.connect(onPlayer_targetTileNotReachable)
+		player.pieceAttacked.connect(onPlayer_pieceAttacked)
+		player.pieceDied.connect(onPlayer_pieceDied)
+		player.turnEnded.connect(onPlayer_turnEnded)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -52,8 +55,7 @@ func _process(delta):
 
 func onInputHandler_mouseClickedAt(mousePosition: Vector2i):
 	print("Observer: mouse clicked at: ", mousePosition)
-	for player in players:
-		player.onSelectingTile(mousePosition)
+	gameController.getCurrentPlayer().onSelectingTile(mousePosition, gameController.getAllOccupiedTiles(), gameController.getEnemyPlayerOccupiedTiles())
 
 func onInputHandler_mouseMoved(mousePosition: Vector2i):
 	board.setHoveringSquare(mousePosition)
@@ -61,18 +63,19 @@ func onInputHandler_mouseMoved(mousePosition: Vector2i):
 func onPlayer_pieceSelected(piece: Piece):
 	print("Observer: piece selected: ", piece)
 	piece.onSelected()
-	board.setReachableTiles(piece.move.getAvailableMoves(6))
+	board.setReachableTiles(piece.move.getAvailableMoves(6, gameController.getAllOccupiedTiles()))
+	board.setAttackableTiles(piece.move.getAvailableAttacks(gameController.getEnemyPlayerOccupiedTiles()))
 
 func onPlayer_pieceUnselected(piece: Piece):
 	print("Observer: piece unselected: ", piece)
 	piece.onUnselected()
-	board.clearReachableTiles()
+	board.clearInteractableTiles()
 	
-func onPlayer_pieceMoved(piece: Piece, position: Vector2i):
-	print("Observer: piece moved: ", piece, " to ", position)
+func onPlayer_pieceMoved(piece: Piece, newPosition: Vector2i):
+	print("Observer: piece moved: ", piece, " to ", newPosition)
 	piece.onMoved()
-	board.clearReachableTiles()
-	gameController.nextPlayer()
+	board.clearInteractableTiles()
+	# gameController.nextPlayer()
 
 func onPlayer_noPieceOnSelectedTile():
 	print("Observer: no piece on selected tile")
@@ -82,3 +85,18 @@ func onPlayer_invalidTargetTile():
 	
 func onPlayer_targetTileNotReachable():
 	print("Observer: target tile not reachable")
+
+func onPlayer_pieceAttacked(attackerPiece: Piece, attackedPosition: Vector2i):
+	print("Observer: piece attacked ", attackerPiece, " position ", attackedPosition)
+	gameController.getEnemyPlayer().takeDamageAtTile(attackerPiece, attackedPosition)
+	attackerPiece.onAttack()
+	board.clearInteractableTiles()
+	# gameController.nextPlayer()
+
+func onPlayer_pieceDied(attackerPiece: Piece, deathPosition: Vector2i):
+	print("Observer: piece died ", attackerPiece, " position ", deathPosition)
+	attackerPiece.move.moveTo(deathPosition)
+
+func onPlayer_turnEnded():
+	print("Observer: turn ended")
+	gameController.nextPlayer()

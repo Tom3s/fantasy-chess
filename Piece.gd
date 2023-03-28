@@ -16,6 +16,7 @@ var graphicPath: String
 var health: HealthComponent
 var move: MoveComponent
 var graphic: PieceGraphic
+var attackStrength: int
 
 var isSelected: bool = false
 
@@ -29,8 +30,14 @@ func init(type: String, initialPosition: Vector2i, pieceColor: Color):
 
 	dataPath = "res://PieceScripts/" + pieceType + "/data.json"
 	print(dataPath)
+
+	var file := FileAccess.open(dataPath, FileAccess.READ)
+	var data = JSON.parse_string(file.get_as_text())
+	var maxHealth = data["maxHealth"]
+	attackStrength = data["attackStrength"]
+
 	health = HealthComponent.instantiate()
-	health.init(dataPath)
+	health.init(maxHealth)
 	add_child(health)
 	
 
@@ -66,6 +73,11 @@ func onUnselected():
 	pass
 	
 func onMoved():
+	isSelected = false
+	graphic.setToUnselected()
+	pass
+
+func onAttack():
 	isSelected = false
 	graphic.setToUnselected()
 	pass

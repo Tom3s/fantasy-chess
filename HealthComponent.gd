@@ -9,14 +9,12 @@ var maxHealth: float = 69
 
 var healthDisplay = null
 
-func init(options: String = "res://PieceScripts/Pawn/data.json") -> void:
+func init(initialMaxHealth = 1) -> void:
 
 	print('Health 1st line')
-	var file := FileAccess.open(options, FileAccess.READ)
-	var data = JSON.parse_string(file.get_as_text())
-	maxHealth = data["maxHealth"]
+	
+	maxHealth = initialMaxHealth
 	currentHealth = maxHealth
-	file.close()
 	
 	healthDisplay = HealthDisplay.instantiate()
 	healthDisplay.init(Callable(self, "getHealth"))

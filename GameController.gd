@@ -35,9 +35,29 @@ func _process(delta):
 func getAllPlayers() -> Array[Player]:
 	return players
 
+func getCurrentPlayer() -> Player:
+	return players[currentPlayerIndex]
+
+func getEnemyPlayer() -> Player:
+	var enemyPlayerIndex := (currentPlayerIndex + 1) % players.size()
+	return players[enemyPlayerIndex]
+
 func nextPlayer():
 	currentPlayerIndex = (currentPlayerIndex + 1) % players.size()
 	players[currentPlayerIndex].startTurn()
+
+func getAllOccupiedTiles() -> Array[Vector2i]:
+	var occupiedTiles: Array[Vector2i] = []
+	for player in players:
+		occupiedTiles.append_array(player.getOccupiedTiles())
+	return occupiedTiles
+
+func getCurrentPlayerOccupiedTiles() -> Array[Vector2i]:
+	return players[currentPlayerIndex].getOccupiedTiles()
+
+func getEnemyPlayerOccupiedTiles() -> Array[Vector2i]:
+	var enemyPlayerIndex := (currentPlayerIndex + 1) % players.size()
+	return players[enemyPlayerIndex].getOccupiedTiles()
 
 func debugCurrentPlayer() -> String:
 	return "Current player: " + str(currentPlayerIndex) + " - " + players[currentPlayerIndex].playerName

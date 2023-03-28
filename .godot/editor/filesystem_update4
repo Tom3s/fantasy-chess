@@ -1,3 +1,6 @@
+res://GameController.gd
+res://Player.gd
+res://PieceScripts/Pawn/Observer.gd
 res://MoveComponent.gd
 res://PieceScripts/Pawn/Main.tscn
 res://HealthComponent.tscn
@@ -5,12 +8,9 @@ res://Board.tscn
 res://PieceGraphic.tscn
 res://PieceScripts/Pawn/Graphic.tscn
 res://MoveComponent.tscn
-res://Board.gd
-res://Player.gd
-res://GameController.gd
-res://PieceScripts/Pawn/data.json
 res://GameController.tscn
+res://Board.gd
 res://PieceNames.gd
 res://Piece.gd
-res://PieceScripts/Pawn/Observer.gd
-res://DebugScreen.gd
+res://HealthComponent.gd
+res://PieceScripts/Pawn/data.json

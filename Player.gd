@@ -26,9 +26,12 @@ var currentlySelectedPiece: Piece = null
 signal pieceSelected(piece: Piece)
 signal pieceUnselected(piece: Piece)
 signal pieceMoved(piece: Piece, position: Vector2i)
+signal pieceAttacked(piece: Piece, position: Vector2i)
 signal noPieceOnSelectedTile()
 signal invalidTargetTile()
 signal targetTileNotReachable()
+signal pieceDied(attacker: Piece, position: Vector2i)
+signal turnEnded()
 
 func init(initialName: String, initialPieceColor: Color, startingRow: int, piecesToPlay: Array[PieceNames] = defaultPieces):
 	playerName = initialName
@@ -49,7 +52,7 @@ func init(initialName: String, initialPieceColor: Color, startingRow: int, piece
 func _ready():
 	pass
 
-func onSelectingTile(tilePosition: Vector2i):
+func onSelectingTile(tilePosition: Vector2i, allOccupiedTiles: Array[Vector2i], enemyOccupiedTiles: Array[Vector2i]):
 	if state == STATES.WAITING_FOR_PIECE_SELECTION:
 		for piece in pieces:
 			print(piece, " position: ", piece.move.localPosition)
@@ -68,16 +71,44 @@ func onSelectingTile(tilePosition: Vector2i):
 				pieceUnselected.emit(currentlySelectedPiece)
 				currentlySelectedPiece = null
 				return
-		# var availableMoves := currentlySelectedPiece.move.getAvailableMoves(6)
+		
+
 		if not GlobalVariables.isTilePositionValid(tilePosition):
 			invalidTargetTile.emit()
-		elif currentlySelectedPiece.move.getAvailableMoves(6).has(tilePosition):
+		elif currentlySelectedPiece.move.getAvailableMoves(6, allOccupiedTiles).has(tilePosition):
 			currentlySelectedPiece.move.moveTo(tilePosition)
 			pieceMoved.emit(currentlySelectedPiece, tilePosition)
 			state = STATES.WAITING_FOR_TURN
+			turnEnded.emit()
+			currentlySelectedPiece = null
+		elif currentlySelectedPiece.move.getAvailableAttacks(enemyOccupiedTiles).has(tilePosition):
+			# currentlySelectedPiece.move.moveTo(tilePosition)
+			pieceAttacked.emit(currentlySelectedPiece, tilePosition)
+			state = STATES.WAITING_FOR_TURN
+			turnEnded.emit()
 			currentlySelectedPiece = null
 		else:
 			targetTileNotReachable.emit()
 
 func startTurn():
 	state = STATES.WAITING_FOR_PIECE_SELECTION
+
+func getOccupiedTiles() -> Array[Vector2i]:
+	var occupiedTiles: Array[Vector2i] = []
+	for piece in pieces:
+		occupiedTiles.append(piece.move.localPosition)
+	return occupiedTiles
+
+func takeDamageAtTile(attackerPiece: Piece, tilePosition: Vector2i):
+	for piece in pieces:
+		if piece.move.localPosition == tilePosition:
+			piece.health.takeDamage(attackerPiece.attackStrength)
+			if piece.health.isDead():
+				pieces.erase(piece)
+				piece.queue_free()
+				pieceDied.emit(attackerPiece, tilePosition)
+			break
+
+
+
+
