@@ -35,6 +35,10 @@ var hoveringSquare: Vector2i = Vector2i(-1, -1)
 var reachableTiles: Array[Vector2i] = []
 var attackableTiles: Array[Vector2i] = []
 
+# signal readyToChangeCamera()
+
+# func _init():
+# 	readyToChangeCamera.emit()
 
 func _draw() -> void:
 	for i in range(width):

@@ -14,3 +14,7 @@ res://PieceNames.gd
 res://Piece.gd
 res://HealthComponent.gd
 res://PieceScripts/Pawn/data.json
+res://Camera2D.gd
+res://GlobalVariables.gd
+res://DebugScreen.gd
+res://Observer.gd

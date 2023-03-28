@@ -8,6 +8,7 @@ var inputHandler: InputHandler
 var gameController: GameController
 var players: Array[Player]
 var board: Board
+var camera: Camera2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -28,7 +29,8 @@ func _ready():
 	board = $"../Board"
 	if board == null:
 		push_warning("Board is null in Observer")
-		
+	
+	camera = %Camera2D
 	
 	connectSignals()
 
@@ -47,6 +49,7 @@ func connectSignals():
 		player.pieceAttacked.connect(onPlayer_pieceAttacked)
 		player.pieceDied.connect(onPlayer_pieceDied)
 		player.turnEnded.connect(onPlayer_turnEnded)
+	# board.readyToChangeCamera.connect(onBoard_readyToChangeCamera)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -100,3 +103,7 @@ func onPlayer_pieceDied(attackerPiece: Piece, deathPosition: Vector2i):
 func onPlayer_turnEnded():
 	print("Observer: turn ended")
 	gameController.nextPlayer()
+
+# func onBoard_readyToChangeCamera():
+# 	print("Observer: ready to change camera")
+# 	camera.centerCamera()

@@ -10,6 +10,8 @@ func _ready():
 	addFunctionToDisplay(Callable(GlobalVariables, "debugBoardDimensions"))
 	addFunctionToDisplay(Callable($"../../Board", "debugReachableTiles"))
 	addFunctionToDisplay(Callable(%GameController, "debugCurrentPlayer"))
+	addFunctionToDisplay(Callable(%Camera2D, "debugCameraPosition"))
+	addFunctionToDisplay(Callable(%Camera2D, "debugCameraZoom"))
 	
 	pass # Replace with function body.
 

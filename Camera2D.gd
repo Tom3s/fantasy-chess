@@ -11,9 +11,13 @@ var MAX_ZOOM: float = 3.0
 const ZOOM_INCREMENT: float = 0.15
 const ZOOM_RATE: float = 8.0
 
+var isCentered: bool = false
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	if !isCentered:
+		centerCamera()
+		isCentered = true
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -40,3 +44,14 @@ func _zoomOut() -> void:
 
 func setCameraPosition(newPosition: Vector2) -> void:
 	position = newPosition
+
+func centerCamera() -> void:
+	position = Vector2(GlobalVariables.BOARD_WIDTH * GlobalVariables.GRID_SIZE / 2.0, GlobalVariables.BOARD_HEIGHT * GlobalVariables.GRID_SIZE / 2.0)
+	# zoom = GlobalVariables.GRID_SIZE * GlobalVariables.BOARD_HEIGHT / (get_viewport_rect().size.y * 1.1) * Vector2.ONE
+	_targetZoom = (get_viewport_rect().size.y * 0.9) / (GlobalVariables.GRID_SIZE * GlobalVariables.BOARD_HEIGHT)
+
+func debugCameraPosition() -> String:
+	return "Camera position: " + str(position)
+
+func debugCameraZoom() -> String:
+	return "Camera zoom: " + str(zoom)
