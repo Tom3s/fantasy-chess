@@ -19,12 +19,12 @@ var graphic: PieceGraphic
 
 var isSelected: bool = false
 
-func init(type: String, initialPosition: Vector2i):
+func init(type: String, initialPosition: Vector2i, pieceColor: Color):
 	pieceType = type
 
 	graphicPath = "res://PieceScripts/" + pieceType + "/Graphic.tscn"
 	graphic = PieceGraphic.instantiate()
-	graphic.init(graphicPath)
+	graphic.init(graphicPath, pieceColor)
 	add_child(graphic)
 
 	dataPath = "res://PieceScripts/" + pieceType + "/data.json"

@@ -12,6 +12,8 @@ enum STATES {
 
 var state: STATES = STATES.WAITING_FOR_PIECE_SELECTION
 
+var pieceColor: Color = Color.LIGHT_BLUE
+
 var pieces: Array[Piece] = []
 
 var piecesInPlay = [PieceNames.PAWN, PieceNames.PAWN, PieceNames.PAWN, PieceNames.PAWN, PieceNames.PAWN]
@@ -30,7 +32,7 @@ func _ready():
 	var index: int = 0
 	for pieceName in piecesInPlay:
 		var piece := Piece.instantiate()
-		piece.init(pieceName, Vector2i(index, 0))
+		piece.init(pieceName, Vector2i(index, 0), pieceColor)
 		add_child(piece)
 		pieces.append(piece)
 

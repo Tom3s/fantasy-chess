@@ -9,3 +9,6 @@ res://Board.gd
 res://MoveComponent.gd
 res://Camera2D.gd
 res://Player.gd
+res://PieceScripts/Pawn/Graphic.gd
+res://PieceGraphic.gd
+res://PieceNames.gd

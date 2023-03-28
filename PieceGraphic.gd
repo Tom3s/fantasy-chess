@@ -6,9 +6,10 @@ const healtBarPosition := Vector2i(128, 10)
 
 var graphic
 
-func init(graphicPath: String):
+func init(graphicPath: String, pieceColor: Color):
 	graphic = load(graphicPath).instantiate()
 	graphic.z_index = -1
+	graphic.setColor(pieceColor)
 	add_child(graphic)
 
 func setToSelected():
