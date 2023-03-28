@@ -7,6 +7,7 @@ var localMousePosition: Vector2i
 # listen for mouse clicks
 signal mouseClickedAt(position: Vector2i)
 signal mouseMovedTo(position: Vector2i)
+signal centerCameraPressed()
 
 # func _ready():
 # 	# listen for mouse clicks
@@ -22,6 +23,10 @@ func _input(event: InputEvent):
 	if event is InputEventMouseButton:
 		if event.is_action_pressed("selectTile"):
 			mouseClickedAt.emit(localMousePosition)
+	
+	if event is InputEventKey:
+		if event.is_action_pressed("centerCamera"):
+			centerCameraPressed.emit()
 
 func convertGlobalMousePositionToLocal(globalPosition: Vector2) -> Vector2i:
 	

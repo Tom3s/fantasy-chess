@@ -18,3 +18,4 @@ res://Camera2D.gd
 res://GlobalVariables.gd
 res://DebugScreen.gd
 res://Observer.gd
+res://InputHandler.gd

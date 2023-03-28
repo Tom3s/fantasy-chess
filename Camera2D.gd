@@ -3,6 +3,7 @@ extends Camera2D
 class_name Camera
 
 var _targetZoom: float = 0.35
+var _targetCenter: Vector2 = Vector2.ZERO
 
 @export_range(0.05, 0.2, 0.05)
 var MIN_ZOOM: float = 0.15
@@ -10,6 +11,7 @@ var MIN_ZOOM: float = 0.15
 var MAX_ZOOM: float = 3.0
 const ZOOM_INCREMENT: float = 0.15
 const ZOOM_RATE: float = 8.0
+const CENTER_RATE: float = 30.0
 
 var isCentered: bool = false
 
@@ -17,12 +19,15 @@ var isCentered: bool = false
 func _ready():
 	if !isCentered:
 		centerCamera()
-		isCentered = true
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	zoom = lerp(zoom, _targetZoom * Vector2.ONE, ZOOM_RATE * delta)
+	if !isCentered and !is_equal_approx(position.x, _targetCenter.x):
+		position = lerp(position, _targetCenter, CENTER_RATE * delta)
+	else:
+		isCentered = true
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
@@ -46,7 +51,8 @@ func setCameraPosition(newPosition: Vector2) -> void:
 	position = newPosition
 
 func centerCamera() -> void:
-	position = Vector2(GlobalVariables.BOARD_WIDTH * GlobalVariables.GRID_SIZE / 2.0, GlobalVariables.BOARD_HEIGHT * GlobalVariables.GRID_SIZE / 2.0)
+	isCentered = false
+	_targetCenter = Vector2(GlobalVariables.BOARD_WIDTH * GlobalVariables.GRID_SIZE / 2.0, GlobalVariables.BOARD_HEIGHT * GlobalVariables.GRID_SIZE / 2.0)
 	# zoom = GlobalVariables.GRID_SIZE * GlobalVariables.BOARD_HEIGHT / (get_viewport_rect().size.y * 1.1) * Vector2.ONE
 	_targetZoom = (get_viewport_rect().size.y * 0.9) / (GlobalVariables.GRID_SIZE * GlobalVariables.BOARD_HEIGHT)
 
