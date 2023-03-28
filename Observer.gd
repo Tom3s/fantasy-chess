@@ -40,6 +40,7 @@ func connectSignals():
 	inputHandler.mouseClickedAt.connect(onInputHandler_mouseClickedAt)
 	inputHandler.mouseMovedTo.connect(onInputHandler_mouseMoved)
 	inputHandler.centerCameraPressed.connect(onInputHandler_centerCameraPressed)
+	inputHandler.resetGamePressed.connect(onInputHandler_resetGamePressed)
 	for player in players:
 		player.pieceSelected.connect(onPlayer_pieceSelected)
 		player.pieceMoved.connect(onPlayer_pieceMoved)
@@ -111,3 +112,7 @@ func onPlayer_turnEnded():
 func onInputHandler_centerCameraPressed():
 	print("Observer: center camera pressed")
 	camera.centerCamera()
+
+func onInputHandler_resetGamePressed():
+	print("Observer: reset game pressed")
+	gameController.resetGame()

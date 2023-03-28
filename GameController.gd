@@ -8,7 +8,7 @@ var players: Array[Player]
 
 var currentPlayerIndex: int
 
-var defaultPieces: Array[String] = [PieceNames.EMPTY, PieceNames.PAWN, PieceNames.KNIGHT, PieceNames.ROOK, PieceNames.BISHOP, PieceNames.QUEEN, PieceNames.ROOK, PieceNames.BISHOP, PieceNames.KNIGHT, PieceNames.PAWN]
+var defaultPieces: Array[String] = [PieceNames.PAWN, PieceNames.KNIGHT, PieceNames.ROOK, PieceNames.BISHOP, PieceNames.QUEEN, PieceNames.ROOK, PieceNames.BISHOP, PieceNames.KNIGHT, PieceNames.PAWN]
 
 
 # Called when the node enters the scene tree for the first time.
@@ -64,4 +64,10 @@ func getEnemyPlayerOccupiedTiles() -> Array[Vector2i]:
 func debugCurrentPlayer() -> String:
 	return "Current player: " + str(currentPlayerIndex) + " - " + players[currentPlayerIndex].playerName
 
+func resetGame():
+	for player in players:
+		player.queue_free()
+	players.clear()
+
+	_ready()
 
