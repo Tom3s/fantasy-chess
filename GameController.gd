@@ -8,7 +8,7 @@ var players: Array[Player]
 
 var currentPlayerIndex: int
 
-var defaultPieces: Array[String] = [PieceNames.EMPTY, PieceNames.PAWN, PieceNames.ROOK, PieceNames.BISHOP, PieceNames.BISHOP, PieceNames.ROOK, PieceNames.PAWN]
+var defaultPieces: Array[String] = [PieceNames.EMPTY, PieceNames.PAWN, PieceNames.KNIGHT, PieceNames.ROOK, PieceNames.BISHOP, PieceNames.QUEEN, PieceNames.ROOK, PieceNames.BISHOP, PieceNames.KNIGHT, PieceNames.PAWN]
 
 
 # Called when the node enters the scene tree for the first time.

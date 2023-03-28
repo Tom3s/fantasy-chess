@@ -33,3 +33,5 @@ res://PieceScripts/Rook/MovementScript.gd
 res://Piece.tscn
 res://HealthDisplay.gd
 res://HealthDisplay.tscn
+res://PieceScripts/Queen/MovementScript.gd
+res://PieceScripts/Knight/MovementScript.gd
