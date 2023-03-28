@@ -41,8 +41,8 @@ func _process(delta):
 func getAvailableMoves(maxCost: int, occupiedTiles: Array[Vector2i]) -> Array[Vector2i]:
 	return movementClass.getAvailableMoves(localPosition, maxCost, occupiedTiles)
 
-func getAvailableAttacks(enemyOccupiedTiles: Array[Vector2i]) -> Array[Vector2i]:
-	return movementClass.getAvailableAttacks(localPosition, enemyOccupiedTiles)
+func getAvailableAttacks(enemyOccupiedTiles: Array[Vector2i], allOccupiedTiles: Array[Vector2i]) -> Array[Vector2i]:
+	return movementClass.getAvailableAttacks(localPosition, enemyOccupiedTiles, allOccupiedTiles)
 
 func targetTileAfterAttack(targetPosition: Vector2i) -> Vector2i:
 	var afterAttackTile: Vector2i = movementClass.targetTileAfterAttack(localPosition, targetPosition)

@@ -17,7 +17,7 @@ func init(initialMaxHealth = 1) -> void:
 	currentHealth = maxHealth
 	
 	healthDisplay = HealthDisplay.instantiate()
-	healthDisplay.init(Callable(self, "getHealth"))
+	healthDisplay.init(Callable(self, "getHealth"), Callable(self, "getMaxHealth"))
 	add_child(healthDisplay)
 	
 # Called when the node enters the scene tree for the first time.
@@ -53,14 +53,15 @@ func heal(amount: float) -> float:
 func getHealth() -> float:
 	return currentHealth
 
+func getMaxHealth() -> float:
+	return maxHealth
+
 func isHealthFull() -> bool:
 	return currentHealth == maxHealth
 
 func isDead() -> bool:
 	return is_zero_approx(currentHealth) || currentHealth < 0
 
-func addHealthBarOffset(offset: Vector2) -> void:
-	healthDisplay.setOffset(offset)
 
 
 	

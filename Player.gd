@@ -35,7 +35,7 @@ signal turnEnded()
 
 func init(initialName: String, initialPieceColor: Color, startingRow: int, piecesToPlay: Array[String]):
 	# print("default pieces: ", defaultPieces)
-	piecesToPlay = [PieceNames.EMPTY, PieceNames.PAWN, PieceNames.EMPTY, PieceNames.BISHOP, PieceNames.BISHOP, PieceNames.EMPTY, PieceNames.PAWN]
+	# piecesToPlay = [PieceNames.EMPTY, PieceNames.PAWN, PieceNames.EMPTY, PieceNames.BISHOP, PieceNames.BISHOP, PieceNames.EMPTY, PieceNames.PAWN]
 	playerName = initialName
 	pieceColor = initialPieceColor
 	print("pieces to play: ", piecesToPlay)
@@ -90,7 +90,7 @@ func onSelectingTile(tilePosition: Vector2i, allOccupiedTiles: Array[Vector2i], 
 			turnEnded.emit()
 			currentlySelectedPiece = null
 		# attackable tile clicked
-		elif currentlySelectedPiece.move.getAvailableAttacks(enemyOccupiedTiles).has(tilePosition):
+		elif currentlySelectedPiece.move.getAvailableAttacks(enemyOccupiedTiles, allOccupiedTiles).has(tilePosition):
 			pieceAttacked.emit(currentlySelectedPiece, tilePosition)
 			state = STATES.WAITING_FOR_TURN
 			turnEnded.emit()

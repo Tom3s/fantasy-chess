@@ -69,7 +69,7 @@ func onPlayer_pieceSelected(piece: Piece):
 	print("Observer: piece selected: ", piece)
 	piece.onSelected()
 	board.setReachableTiles(piece.move.getAvailableMoves(6, gameController.getAllOccupiedTiles()))
-	board.setAttackableTiles(piece.move.getAvailableAttacks(gameController.getEnemyPlayerOccupiedTiles()))
+	board.setAttackableTiles(piece.move.getAvailableAttacks(gameController.getEnemyPlayerOccupiedTiles(), gameController.getAllOccupiedTiles()))
 
 func onPlayer_pieceUnselected(piece: Piece):
 	print("Observer: piece unselected: ", piece)

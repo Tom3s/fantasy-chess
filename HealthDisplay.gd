@@ -1,14 +1,16 @@
-extends Label
+extends ProgressBar
 
 var healthSource: Callable = Callable(self, "placeHolder")
-var isReady := false
+var healthMax: Callable = Callable(self, "placeHolder")
 
-var font_size = 30
-
-func init(source: Callable):
+func init(source: Callable, max: Callable):
 	healthSource = source
+	healthMax = max
 
-	isReady = true
+	max_value = max.call()
+
+	size = Vector2(180, 26)
+	position = Vector2(38, 250)
 	pass
 
 # Called when the node enters the scene tree for the first time.
@@ -18,8 +20,10 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if isReady:
-		self.text = "Health: " + str(healthSource.call())
+	# if isReady:
+	# 	self.text = "Health: " + str(healthSource.call())
+	value = healthSource.call()
+	pass
 		
 func setOffset(offset: Vector2):
 	offset_left = offset.x

@@ -1,15 +1,14 @@
-extends Node
+extends Node2D
 
 class_name PieceGraphic
 
-const healtBarPosition := Vector2i(128, 10)
+const Graphic := preload("res://Graphic.tscn")
 
 var graphic
 
-func init(graphicPath: String, pieceColor: Color):
-	graphic = load(graphicPath).instantiate()
-	graphic.z_index = -1
-	graphic.setColor(pieceColor)
+func init(texturePath: String, pieceColor: Color):
+	graphic = Graphic.instantiate()
+	graphic.init(texturePath, pieceColor)
 	add_child(graphic)
 
 func setToSelected():

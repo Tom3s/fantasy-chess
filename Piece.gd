@@ -11,7 +11,7 @@ var pieceType: String
 
 var dataPath: String
 var movePath: String
-var graphicPath: String
+var texturePath: String
 
 var health: HealthComponent
 var move: MoveComponent
@@ -23,9 +23,9 @@ var isSelected: bool = false
 func init(type: String, initialPosition: Vector2i, pieceColor: Color):
 	pieceType = type
 
-	graphicPath = "res://PieceScripts/" + pieceType + "/Graphic.tscn"
+	texturePath = "res://PieceScripts/" + pieceType + "/icon.png"
 	graphic = PieceGraphic.instantiate()
-	graphic.init(graphicPath, pieceColor)
+	graphic.init(texturePath, pieceColor)
 	add_child(graphic)
 
 	dataPath = "res://PieceScripts/" + pieceType + "/data.json"
@@ -41,7 +41,6 @@ func init(type: String, initialPosition: Vector2i, pieceColor: Color):
 	add_child(health)
 	
 
-	health.addHealthBarOffset(graphic.healtBarPosition)
 	# moveClass = 
 	movePath = "res://PieceScripts/" + pieceType + "/MovementScript.gd"
 	move = MoveComponent.instantiate()
