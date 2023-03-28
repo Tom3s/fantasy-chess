@@ -21,8 +21,7 @@ func spinDice(finalValue: int):
 		frames.shuffle()
 		animFrames.append_array(frames)
 	
-
-
+	animFrames[-1] = finalValue
 
 	for i in animFrames.size():
 		var time = remap(i, 0, animFrames.size(), 0.005, 0.15)
@@ -34,8 +33,7 @@ func spinDice(finalValue: int):
 		tween.tween_property(self, "rotation_degrees", 0.0, time) 
 		tween.parallel().tween_property(self, "position", basePosition, time).finished.connect(nextFrame)
 		# tween.tween_interval(time).finished.connect(nextFrame)
-
-	tween.tween_property(self, "frame", finalValue, 0.0)
+	
 	tween.finished.connect(afterAnimation)
 	
 func afterAnimation():
