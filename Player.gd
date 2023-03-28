@@ -10,12 +10,15 @@ enum STATES {
 	WAITING_FOR_MOVE_SELECTION
 }
 
-var state: STATES = STATES.WAITING_FOR_PIECE_SELECTION
+var state: STATES = STATES.WAITING_FOR_TURN
+
+var playerName: String
 
 var pieceColor: Color = Color.LIGHT_BLUE
 
 var pieces: Array[Piece] = []
 
+var defaultPieces: Array[PieceNames] = [PieceNames.PAWN, PieceNames.PAWN, PieceNames.PAWN, PieceNames.PAWN, PieceNames.PAWN]
 var piecesInPlay = [PieceNames.PAWN, PieceNames.PAWN, PieceNames.PAWN, PieceNames.PAWN, PieceNames.PAWN]
 
 var currentlySelectedPiece: Piece = null
@@ -27,17 +30,24 @@ signal noPieceOnSelectedTile()
 signal invalidTargetTile()
 signal targetTileNotReachable()
 
-
-func _ready():
+func init(initialName: String, initialPieceColor: Color, startingRow: int, piecesToPlay: Array[PieceNames] = defaultPieces):
+	playerName = initialName
+	pieceColor = initialPieceColor
+	if piecesToPlay.size() > 0:
+		piecesInPlay = piecesToPlay
+	
 	var index: int = 0
 	for pieceName in piecesInPlay:
 		var piece := Piece.instantiate()
-		piece.init(pieceName, Vector2i(index, 0), pieceColor)
+		piece.init(pieceName, Vector2i(index, startingRow), pieceColor)
 		add_child(piece)
 		pieces.append(piece)
 
 		index += 1
+	
 
+func _ready():
+	pass
 
 func onSelectingTile(tilePosition: Vector2i):
 	if state == STATES.WAITING_FOR_PIECE_SELECTION:
@@ -64,7 +74,10 @@ func onSelectingTile(tilePosition: Vector2i):
 		elif currentlySelectedPiece.move.getAvailableMoves(6).has(tilePosition):
 			currentlySelectedPiece.move.moveTo(tilePosition)
 			pieceMoved.emit(currentlySelectedPiece, tilePosition)
-			state = STATES.WAITING_FOR_PIECE_SELECTION
+			state = STATES.WAITING_FOR_TURN
 			currentlySelectedPiece = null
 		else:
 			targetTileNotReachable.emit()
+
+func startTurn():
+	state = STATES.WAITING_FOR_PIECE_SELECTION

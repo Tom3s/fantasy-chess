@@ -9,6 +9,7 @@ func _ready():
 	addFunctionToDisplay(Callable(%InputHandler, "debugLocalMousePosition"))
 	addFunctionToDisplay(Callable(GlobalVariables, "debugBoardDimensions"))
 	addFunctionToDisplay(Callable($"../../Board", "debugReachableTiles"))
+	addFunctionToDisplay(Callable(%GameController, "debugCurrentPlayer"))
 	
 	pass # Replace with function body.
 

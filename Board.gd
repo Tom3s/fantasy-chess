@@ -47,10 +47,11 @@ func _draw() -> void:
 	
 	
 	for tile in reachableTiles:
-		var posX = tile.x * GlobalVariables.GRID_SIZE - offsetX + padding
-		var posY = tile.y * GlobalVariables.GRID_SIZE - offsetY + padding
+		var posX = tile.x * GlobalVariables.GRID_SIZE - offsetX # + padding
+		var posY = tile.y * GlobalVariables.GRID_SIZE - offsetY # + padding
 		
-		draw_rect(Rect2(posX, posY, GlobalVariables.GRID_SIZE - padding*2, GlobalVariables.GRID_SIZE - padding*2), Color.DARK_OLIVE_GREEN, false, padding * 2)
+		# draw_rect(Rect2(posX, posY, GlobalVariables.GRID_SIZE - padding*2, GlobalVariables.GRID_SIZE - padding*2), Color.DARK_OLIVE_GREEN, false, padding * 2)
+		draw_rect(Rect2(posX, posY, GlobalVariables.GRID_SIZE, GlobalVariables.GRID_SIZE), Color(0.0, 0.8, 0.2, 0.5))
 	
 	if hoveringSquare != Vector2i(-1, -1):
 		var posX = hoveringSquare.x * GlobalVariables.GRID_SIZE - offsetX + padding
