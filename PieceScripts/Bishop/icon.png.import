@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bnal0y6bld4jd"
-path="res://.godot/imported/Pawn.png-a80e6733545e50f717f769510dc0a3d2.ctex"
+uid="uid://bm64gor6nutal"
+path="res://.godot/imported/icon.png-66f907c7e0724989559f30475357a533.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://PieceScripts/Pawn/Pawn.png"
-dest_files=["res://.godot/imported/Pawn.png-a80e6733545e50f717f769510dc0a3d2.ctex"]
+source_file="res://PieceScripts/Bishop/icon.png"
+dest_files=["res://.godot/imported/icon.png-66f907c7e0724989559f30475357a533.ctex"]
 
 [params]
 
@@ -31,4 +31,4 @@ process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
-detect_3d/compress_to=0
+detect_3d/compress_to=1

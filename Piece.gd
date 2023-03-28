@@ -77,7 +77,12 @@ func onMoved():
 	graphic.setToUnselected()
 	pass
 
-func onAttack():
-	isSelected = false
-	graphic.setToUnselected()
+func onAttack(attackedPosition: Vector2i):
+	move.moveTo(move.targetTileAfterAttack(attackedPosition))
+	onUnselected()
+	pass
+
+func onKill(attackedPosition: Vector2i):
+	move.moveTo(attackedPosition)
+	onUnselected()
 	pass

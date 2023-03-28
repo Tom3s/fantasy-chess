@@ -8,18 +8,20 @@ var players: Array[Player]
 
 var currentPlayerIndex: int
 
+var defaultPieces: Array[String] = [PieceNames.PAWN, PieceNames.BISHOP, PieceNames.BISHOP, PieceNames.PAWN]
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	# player1
 	var player := Player.instantiate()
-	player.init("Cyan", Color.CYAN, 0)
+	player.init("Cyan", Color.CYAN, 0, defaultPieces)
 	add_child(player)
 	players.append(player)
 
 	# player2
 	player = Player.instantiate()
-	player.init("Orange", Color.CORAL, GlobalVariables.BOARD_HEIGHT - 1)
+	player.init("Orange", Color.CORAL, GlobalVariables.BOARD_HEIGHT - 1, defaultPieces)
 	add_child(player)
 	players.append(player)
 

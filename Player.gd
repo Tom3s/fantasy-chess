@@ -18,8 +18,7 @@ var pieceColor: Color = Color.LIGHT_BLUE
 
 var pieces: Array[Piece] = []
 
-var defaultPieces: Array[PieceNames] = [PieceNames.PAWN, PieceNames.PAWN, PieceNames.PAWN, PieceNames.PAWN, PieceNames.PAWN]
-var piecesInPlay = [PieceNames.PAWN, PieceNames.PAWN, PieceNames.PAWN, PieceNames.PAWN, PieceNames.PAWN]
+var piecesInPlay: Array[String]
 
 var currentlySelectedPiece: Piece = null
 # signals
@@ -31,16 +30,23 @@ signal noPieceOnSelectedTile()
 signal invalidTargetTile()
 signal targetTileNotReachable()
 signal pieceDied(attacker: Piece, position: Vector2i)
+signal pieceTookDamage(attacker: Piece, position: Vector2i)
 signal turnEnded()
 
-func init(initialName: String, initialPieceColor: Color, startingRow: int, piecesToPlay: Array[PieceNames] = defaultPieces):
+func init(initialName: String, initialPieceColor: Color, startingRow: int, piecesToPlay: Array[String]):
+	# print("default pieces: ", defaultPieces)
+	piecesToPlay = [PieceNames.EMPTY, PieceNames.PAWN, PieceNames.EMPTY, PieceNames.BISHOP, PieceNames.BISHOP, PieceNames.EMPTY, PieceNames.PAWN]
 	playerName = initialName
 	pieceColor = initialPieceColor
-	if piecesToPlay.size() > 0:
-		piecesInPlay = piecesToPlay
+	print("pieces to play: ", piecesToPlay)
+	piecesInPlay = piecesToPlay
+	print("pieces in play: ", piecesInPlay)
 	
 	var index: int = 0
 	for pieceName in piecesInPlay:
+		if pieceName == PieceNames.EMPTY:
+			index += 1
+			continue
 		var piece := Piece.instantiate()
 		piece.init(pieceName, Vector2i(index, startingRow), pieceColor)
 		add_child(piece)
@@ -72,21 +78,24 @@ func onSelectingTile(tilePosition: Vector2i, allOccupiedTiles: Array[Vector2i], 
 				currentlySelectedPiece = null
 				return
 		
-
+		
+		# outside of board clicked
 		if not GlobalVariables.isTilePositionValid(tilePosition):
 			invalidTargetTile.emit()
+		# reachable tile clicked
 		elif currentlySelectedPiece.move.getAvailableMoves(6, allOccupiedTiles).has(tilePosition):
 			currentlySelectedPiece.move.moveTo(tilePosition)
 			pieceMoved.emit(currentlySelectedPiece, tilePosition)
 			state = STATES.WAITING_FOR_TURN
 			turnEnded.emit()
 			currentlySelectedPiece = null
+		# attackable tile clicked
 		elif currentlySelectedPiece.move.getAvailableAttacks(enemyOccupiedTiles).has(tilePosition):
-			# currentlySelectedPiece.move.moveTo(tilePosition)
 			pieceAttacked.emit(currentlySelectedPiece, tilePosition)
 			state = STATES.WAITING_FOR_TURN
 			turnEnded.emit()
 			currentlySelectedPiece = null
+		# unreachable tile clicked
 		else:
 			targetTileNotReachable.emit()
 
@@ -107,6 +116,8 @@ func takeDamageAtTile(attackerPiece: Piece, tilePosition: Vector2i):
 				pieces.erase(piece)
 				piece.queue_free()
 				pieceDied.emit(attackerPiece, tilePosition)
+			else:
+				pieceTookDamage.emit(attackerPiece, tilePosition)
 			break
 
 

@@ -50,6 +50,7 @@ func connectSignals():
 		player.pieceAttacked.connect(onPlayer_pieceAttacked)
 		player.pieceDied.connect(onPlayer_pieceDied)
 		player.turnEnded.connect(onPlayer_turnEnded)
+		player.pieceTookDamage.connect(onPlayer_pieceTookDamage)
 	# board.readyToChangeCamera.connect(onBoard_readyToChangeCamera)
 
 
@@ -93,13 +94,15 @@ func onPlayer_targetTileNotReachable():
 func onPlayer_pieceAttacked(attackerPiece: Piece, attackedPosition: Vector2i):
 	print("Observer: piece attacked ", attackerPiece, " position ", attackedPosition)
 	gameController.getEnemyPlayer().takeDamageAtTile(attackerPiece, attackedPosition)
-	attackerPiece.onAttack()
 	board.clearInteractableTiles()
-	# gameController.nextPlayer()
 
 func onPlayer_pieceDied(attackerPiece: Piece, deathPosition: Vector2i):
 	print("Observer: piece died ", attackerPiece, " position ", deathPosition)
-	attackerPiece.move.moveTo(deathPosition)
+	attackerPiece.onKill(deathPosition)
+
+func onPlayer_pieceTookDamage(attackerPiece: Piece, attackedPosition: Vector2i):
+	print("Observer: piece took damage ", attackerPiece, " position ", attackedPosition)
+	attackerPiece.onAttack(attackedPosition)
 
 func onPlayer_turnEnded():
 	print("Observer: turn ended")

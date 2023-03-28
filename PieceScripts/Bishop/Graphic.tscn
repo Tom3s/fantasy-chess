@@ -2,7 +2,7 @@
 
 [ext_resource type="Shader" path="res://SignedDistanceField.gdshader" id="1_acqh1"]
 [ext_resource type="Script" path="res://PieceScripts/Pawn/Graphic.gd" id="1_wjp3w"]
-[ext_resource type="Texture2D" uid="uid://bnal0y6bld4jd" path="res://PieceScripts/Pawn/icon.png" id="2_rhvgf"]
+[ext_resource type="Texture2D" uid="uid://bm64gor6nutal" path="res://PieceScripts/Bishop/icon.png" id="2_vivvh"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_f34yj"]
 resource_local_to_scene = true
@@ -16,6 +16,6 @@ shader_parameter/outline_softness = 0.008
 
 [node name="Graphic" type="Sprite2D"]
 material = SubResource("ShaderMaterial_f34yj")
-texture = ExtResource("2_rhvgf")
+texture = ExtResource("2_vivvh")
 centered = false
 script = ExtResource("1_wjp3w")

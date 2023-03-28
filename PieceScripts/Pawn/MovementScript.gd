@@ -34,3 +34,6 @@ static func getAvailableAttacks(position: Vector2i, enemyOccupiedTiles: Array[Ve
 
 static func calculateCost(position: Vector2i, targetPosition: Vector2i) -> int:
     return abs(position.y - targetPosition.y)
+
+static func targetTileAfterAttack(localPosition, targetPosition) -> Vector2i:
+    return localPosition

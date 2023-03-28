@@ -44,6 +44,11 @@ func getAvailableMoves(maxCost: int, occupiedTiles: Array[Vector2i]) -> Array[Ve
 func getAvailableAttacks(enemyOccupiedTiles: Array[Vector2i]) -> Array[Vector2i]:
 	return movementClass.getAvailableAttacks(localPosition, enemyOccupiedTiles)
 
+func targetTileAfterAttack(targetPosition: Vector2i) -> Vector2i:
+	var afterAttackTile: Vector2i = movementClass.targetTileAfterAttack(localPosition, targetPosition)
+	print("Target tile after attack: ", afterAttackTile)
+	return afterAttackTile
+
 func calculateCost(targetPosition: Vector2i) -> int:
 	return movementClass.calculateCost(localPosition, targetPosition)
 
