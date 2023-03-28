@@ -1,5 +1,7 @@
-ProgressBar
+AudioStreamPlayer2D
 AnimationPlayer
+AnimatedSprite2D
+ProgressBar
 Node2D
 CanvasLayer
 SubViewport

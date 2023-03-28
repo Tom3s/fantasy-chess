@@ -116,3 +116,4 @@ func onInputHandler_centerCameraPressed():
 func onInputHandler_resetGamePressed():
 	print("Observer: reset game pressed")
 	gameController.resetGame()
+	camera.centerCamera()
