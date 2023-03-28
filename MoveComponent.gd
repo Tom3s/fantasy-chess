@@ -3,7 +3,8 @@ extends Node
 
 class_name MoveComponent
 
-const MAX_MOVES = 6
+const MAX_MOVES := 6
+const MOVEMENT_SPEED := 15.0
 
 # var TargetLocation := load("res://TargetLocation.gd")
 
@@ -21,15 +22,21 @@ var classAvailableAttacks: Callable
 var classCalculateCost: Callable
 
 var parentPiece: Piece
+var parentTargetPosition: Vector2
 
 func init(movementClassPath: String, initialPosition: Vector2i, parent: Piece):
 	parentPiece = parent
 	
 	localPosition = initialPosition
+	parentPiece.position = localPosition * GlobalVariables.GRID_SIZE
 
 	print("Movement class path: " + movementClassPath)
 
 	movementClass = load(movementClassPath)
+
+func _process(delta):
+	parentPiece.position = lerp(parentPiece.position, parentTargetPosition, MOVEMENT_SPEED * delta)
+
 
 func getAvailableMoves(maxCost: int) -> Array[Vector2i]:
 	return movementClass.getAvailableMoves(localPosition, maxCost)
@@ -52,5 +59,5 @@ func setPosition(newPosition: Vector2i):
 	localPosition = onPositionChanged(newPosition)
 	
 func onPositionChanged(newPosition: Vector2i) -> Vector2i:
-	parentPiece.position = newPosition * GlobalVariables.GRID_SIZE
+	parentTargetPosition = newPosition * GlobalVariables.GRID_SIZE
 	return newPosition

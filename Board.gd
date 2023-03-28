@@ -67,12 +67,12 @@ func setWidth(newWidth: int) -> void:
 
 func onHeightChanged(newHeight: int) -> int:
 	queue_redraw()
-	# GlobalVariables.setBoardDimensions(width, newHeight)
+	GlobalVariables.setBoardDimensions(width, newHeight)
 	return newHeight
 
 func onWidthChanged(newWidth: int) -> int:
 	queue_redraw()
-	# GlobalVariables.setBoardDimensions(newWidth, height)
+	GlobalVariables.setBoardDimensions(newWidth, height)
 	return newWidth
 
 func setHoveringSquare(pos: Vector2i) -> void:
