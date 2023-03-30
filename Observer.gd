@@ -33,14 +33,18 @@ func _ready():
 	camera = %Camera2D
 	
 	connectSignals()
+	connectPlayerSignals()
 
-	# Connect signals
+	onInputHandler_resetGamePressed()
 
 func connectSignals():
 	inputHandler.mouseClickedAt.connect(onInputHandler_mouseClickedAt)
 	inputHandler.mouseMovedTo.connect(onInputHandler_mouseMoved)
 	inputHandler.centerCameraPressed.connect(onInputHandler_centerCameraPressed)
 	inputHandler.resetGamePressed.connect(onInputHandler_resetGamePressed)
+	gameController.nextPieceSelected.connect(onGameController_pieceSelected)
+
+func connectPlayerSignals():
 	for player in players:
 		player.pieceSelected.connect(onPlayer_pieceSelected)
 		player.pieceMoved.connect(onPlayer_pieceMoved)
@@ -53,11 +57,6 @@ func connectSignals():
 		player.turnEnded.connect(onPlayer_turnEnded)
 		player.pieceTookDamage.connect(onPlayer_pieceTookDamage)
 	# board.readyToChangeCamera.connect(onBoard_readyToChangeCamera)
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
 
 func onInputHandler_mouseClickedAt(mousePosition: Vector2i):
 	print("Observer: mouse clicked at: ", mousePosition)
@@ -97,8 +96,9 @@ func onPlayer_pieceAttacked(attackerPiece: Piece, attackedPosition: Vector2i):
 	gameController.getEnemyPlayer().takeDamageAtTile(attackerPiece, attackedPosition)
 	board.clearInteractableTiles()
 
-func onPlayer_pieceDied(attackerPiece: Piece, deathPosition: Vector2i):
+func onPlayer_pieceDied(attackerPiece: Piece, deadPiece: Piece, deathPosition: Vector2i):
 	print("Observer: piece died ", attackerPiece, " position ", deathPosition)
+	gameController.onPieceDeath(deadPiece)
 	attackerPiece.onKill(deathPosition)
 
 func onPlayer_pieceTookDamage(attackerPiece: Piece, attackedPosition: Vector2i):
@@ -117,3 +117,12 @@ func onInputHandler_resetGamePressed():
 	print("Observer: reset game pressed")
 	gameController.resetGame()
 	camera.centerCamera()
+	players = gameController.getAllPlayers()
+	connectPlayerSignals()
+
+func onGameController_pieceSelected(piece: Piece):
+	print("Observer: piece selected: ", piece)
+	gameController.getCurrentPlayer().startTurn(piece)
+	piece.onSelected()
+	board.setReachableTiles(piece.move.getAvailableMoves(6, gameController.getAllOccupiedTiles()))
+	board.setAttackableTiles(piece.move.getAvailableAttacks(gameController.getEnemyPlayerOccupiedTiles(), gameController.getAllOccupiedTiles()))

@@ -10,9 +10,6 @@ var maxHealth: float = 69
 var healthDisplay = null
 
 func init(initialMaxHealth = 1) -> void:
-
-	print('Health 1st line')
-	
 	maxHealth = initialMaxHealth
 	currentHealth = maxHealth
 	
@@ -24,8 +21,6 @@ func init(initialMaxHealth = 1) -> void:
 func _ready():
 	if healthDisplay == null:
 		init()
-	print('Health')
-	print(maxHealth)
 	pass # Replace with function body.
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

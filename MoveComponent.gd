@@ -20,18 +20,12 @@ var classAvailableAttacks: Callable
 var classCalculateCost: Callable
 
 var parentPiece: Piece
-# var parentTargetPosition: Vector2
-
-func _ready():
-	parentPiece = Piece.new()
 
 func init(movementClassPath: String, initialPosition: Vector2i, parent: Piece):
 	parentPiece = parent
 	
 	localPosition = initialPosition
 	parentPiece.position = localPosition * GlobalVariables.GRID_SIZE
-
-	print("Movement class path: " + movementClassPath)
 
 	movementClass = load(movementClassPath)
 
@@ -57,6 +51,5 @@ func setPosition(newPosition: Vector2i):
 	localPosition = onPositionChanged(newPosition)
 	
 func onPositionChanged(newPosition: Vector2i) -> Vector2i:
-	print("Parent Piece: ", parentPiece)
 	create_tween().tween_property(parentPiece, "position", Vector2(newPosition) * GlobalVariables.GRID_SIZE, MOVEMENT_TIME).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_EXPO)
 	return newPosition

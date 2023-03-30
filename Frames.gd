@@ -45,4 +45,3 @@ func afterAnimation():
 
 func nextFrame():
 	changedFrame.emit()
-	# print("next frame")

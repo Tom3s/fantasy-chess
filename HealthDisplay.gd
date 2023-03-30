@@ -13,15 +13,7 @@ func init(source: Callable, getMax: Callable):
 	position = Vector2(38, 250)
 	pass
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	# if isReady:
-	# 	self.text = "Health: " + str(healthSource.call())
 	value = healthSource.call()
 	pass
 		
