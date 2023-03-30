@@ -5,6 +5,8 @@ class_name MoveComponent
 
 const MAX_MOVES := 6
 const MOVEMENT_TIME := 0.3
+const ATTACK_COST: int = 4
+var EMPTY_ARRAY: Array[Vector2i] = []
 
 @onready
 var localPosition: Vector2i :
@@ -31,19 +33,16 @@ func init(movementClassPath: String, initialPosition: Vector2i, parent: Piece):
 	localPosition = initialPosition
 	parentPiece.position = localPosition * GlobalVariables.GRID_SIZE
 
-	print("Movement class path: " + movementClassPath)
-
 	movementClass = load(movementClassPath)
 
 func getAvailableMoves(maxCost: int, occupiedTiles: Array[Vector2i]) -> Array[Vector2i]:
 	return movementClass.getAvailableMoves(localPosition, maxCost, occupiedTiles)
 
-func getAvailableAttacks(enemyOccupiedTiles: Array[Vector2i], allOccupiedTiles: Array[Vector2i]) -> Array[Vector2i]:
-	return movementClass.getAvailableAttacks(localPosition, enemyOccupiedTiles, allOccupiedTiles)
+func getAvailableAttacks(maxCost: int, enemyOccupiedTiles: Array[Vector2i], allOccupiedTiles: Array[Vector2i]) -> Array[Vector2i]:
+	return movementClass.getAvailableAttacks(localPosition, maxCost, enemyOccupiedTiles, allOccupiedTiles) if maxCost >= ATTACK_COST else EMPTY_ARRAY
 
 func targetTileAfterAttack(targetPosition: Vector2i) -> Vector2i:
 	var afterAttackTile: Vector2i = movementClass.targetTileAfterAttack(localPosition, targetPosition)
-	print("Target tile after attack: ", afterAttackTile)
 	return afterAttackTile
 
 func calculateCost(targetPosition: Vector2i) -> int:
@@ -57,6 +56,5 @@ func setPosition(newPosition: Vector2i):
 	localPosition = onPositionChanged(newPosition)
 	
 func onPositionChanged(newPosition: Vector2i) -> Vector2i:
-	print("Parent Piece: ", parentPiece)
 	create_tween().tween_property(parentPiece, "position", Vector2(newPosition) * GlobalVariables.GRID_SIZE, MOVEMENT_TIME).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_EXPO)
 	return newPosition

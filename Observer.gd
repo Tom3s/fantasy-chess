@@ -9,6 +9,7 @@ var gameController: GameController
 var players: Array[Player]
 var board: Board
 var camera: Camera2D
+var dice: Dice
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -32,7 +33,10 @@ func _ready():
 	
 	camera = %Camera2D
 	
+	dice = %Dice
+
 	connectSignals()
+	connectPlayerSignals()
 
 	# Connect signals
 
@@ -41,6 +45,11 @@ func connectSignals():
 	inputHandler.mouseMovedTo.connect(onInputHandler_mouseMoved)
 	inputHandler.centerCameraPressed.connect(onInputHandler_centerCameraPressed)
 	inputHandler.resetGamePressed.connect(onInputHandler_resetGamePressed)
+	gameController.waitingForRoll.connect(onGameController_waitingForRoll)
+	dice.atMiddle.connect(onDice_atMiddle)
+	dice.finishedRoll.connect(onDice_finishedRoll)
+
+func connectPlayerSignals():
 	for player in players:
 		player.pieceSelected.connect(onPlayer_pieceSelected)
 		player.pieceMoved.connect(onPlayer_pieceMoved)
@@ -55,13 +64,9 @@ func connectSignals():
 	# board.readyToChangeCamera.connect(onBoard_readyToChangeCamera)
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
-
 func onInputHandler_mouseClickedAt(mousePosition: Vector2i):
 	print("Observer: mouse clicked at: ", mousePosition)
-	gameController.getCurrentPlayer().onSelectingTile(mousePosition, gameController.getAllOccupiedTiles(), gameController.getEnemyPlayerOccupiedTiles())
+	gameController.getCurrentPlayer().onSelectingTile(mousePosition, gameController.currentRoll, gameController.getAllOccupiedTiles(), gameController.getEnemyPlayerOccupiedTiles())
 
 func onInputHandler_mouseMoved(mousePosition: Vector2i):
 	board.setHoveringSquare(mousePosition)
@@ -69,8 +74,8 @@ func onInputHandler_mouseMoved(mousePosition: Vector2i):
 func onPlayer_pieceSelected(piece: Piece):
 	print("Observer: piece selected: ", piece)
 	piece.onSelected()
-	board.setReachableTiles(piece.move.getAvailableMoves(6, gameController.getAllOccupiedTiles()))
-	board.setAttackableTiles(piece.move.getAvailableAttacks(gameController.getEnemyPlayerOccupiedTiles(), gameController.getAllOccupiedTiles()))
+	board.setReachableTiles(piece.move.getAvailableMoves(gameController.currentRoll, gameController.getAllOccupiedTiles()))
+	board.setAttackableTiles(piece.move.getAvailableAttacks(gameController.currentRoll, gameController.getEnemyPlayerOccupiedTiles(), gameController.getAllOccupiedTiles()))
 
 func onPlayer_pieceUnselected(piece: Piece):
 	print("Observer: piece unselected: ", piece)
@@ -109,6 +114,7 @@ func onPlayer_turnEnded():
 	print("Observer: turn ended")
 	gameController.nextPlayer()
 
+
 func onInputHandler_centerCameraPressed():
 	print("Observer: center camera pressed")
 	camera.centerCamera()
@@ -117,3 +123,18 @@ func onInputHandler_resetGamePressed():
 	print("Observer: reset game pressed")
 	gameController.resetGame()
 	camera.centerCamera()
+	players = gameController.getAllPlayers()
+	connectPlayerSignals()
+
+func onGameController_waitingForRoll():
+	print("Observer: waiting for roll")
+	dice.getReadyToRoll()
+
+func onDice_atMiddle():
+	print("Observer: dice at middle")
+	gameController.currentRoll = dice.rollDice()
+	
+
+func onDice_finishedRoll():
+	print("Observer: dice finished roll")
+	gameController.startCurrentPlayerTurn()

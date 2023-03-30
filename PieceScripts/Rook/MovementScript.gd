@@ -2,25 +2,25 @@ extends Node
 
 static func getAvailableMoves(position: Vector2i, maxCost: int, occupiedTiles: Array[Vector2i]) -> Array[Vector2i]:
 	var availableMoves: Array[Vector2i] = []
-	for i in range(1, maxCost):
+	for i in range(1, maxCost + 1):
 		var targetPosition := Vector2i(position.x + i, position.y)
 		if targetPosition in occupiedTiles:
 			break
 		availableMoves.append(targetPosition)
 	
-	for i in range(1, maxCost):
+	for i in range(1, maxCost + 1):
 		var targetPosition := Vector2i(position.x - i, position.y)
 		if targetPosition in occupiedTiles:
 			break
 		availableMoves.append(targetPosition)
 	
-	for i in range(1, maxCost):
+	for i in range(1, maxCost + 1):
 		var targetPosition := Vector2i(position.x, position.y + i)
 		if targetPosition in occupiedTiles:
 			break
 		availableMoves.append(targetPosition)
 	
-	for i in range(1, maxCost):
+	for i in range(1, maxCost + 1):
 		var targetPosition := Vector2i(position.x, position.y - i)
 		if targetPosition in occupiedTiles:
 			break
@@ -30,10 +30,9 @@ static func getAvailableMoves(position: Vector2i, maxCost: int, occupiedTiles: A
 
 	return availableMoves
 
-static func getAvailableAttacks(position: Vector2i, enemyOccupiedTiles: Array[Vector2i], allOccupiedTiles: Array[Vector2i]) -> Array[Vector2i]:
+static func getAvailableAttacks(position: Vector2i, maxCost: int, enemyOccupiedTiles: Array[Vector2i], allOccupiedTiles: Array[Vector2i]) -> Array[Vector2i]:
 	var availableAttacks: Array[Vector2i] = []
-	var maxCost = 6
-	for i in range(1, maxCost):
+	for i in range(1, maxCost + 1):
 		var targetPosition := Vector2i(position.x + i, position.y)
 		if targetPosition in enemyOccupiedTiles:
 			availableAttacks.append(targetPosition)
@@ -41,7 +40,7 @@ static func getAvailableAttacks(position: Vector2i, enemyOccupiedTiles: Array[Ve
 		if targetPosition in allOccupiedTiles:
 			break
 	
-	for i in range(1, maxCost):
+	for i in range(1, maxCost + 1):
 		var targetPosition := Vector2i(position.x - i, position.y)
 		if targetPosition in enemyOccupiedTiles:
 			availableAttacks.append(targetPosition)
@@ -49,7 +48,7 @@ static func getAvailableAttacks(position: Vector2i, enemyOccupiedTiles: Array[Ve
 		if targetPosition in allOccupiedTiles:
 			break
 	
-	for i in range(1, maxCost):
+	for i in range(1, maxCost + 1):
 		var targetPosition := Vector2i(position.x, position.y + i)
 		if targetPosition in enemyOccupiedTiles:
 			availableAttacks.append(targetPosition)
@@ -57,7 +56,7 @@ static func getAvailableAttacks(position: Vector2i, enemyOccupiedTiles: Array[Ve
 		if targetPosition in allOccupiedTiles:
 			break
 	
-	for i in range(1, maxCost):
+	for i in range(1, maxCost + 1):
 		var targetPosition := Vector2i(position.x, position.y - i)
 		if targetPosition in enemyOccupiedTiles:
 			availableAttacks.append(targetPosition)

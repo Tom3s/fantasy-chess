@@ -93,7 +93,6 @@ func setHoveringSquare(pos: Vector2i) -> void:
 	
 	if GlobalVariables.isTilePositionValid(pos):
 		hoveringSquare = pos
-		# print("Drawing hovering square at " + str(pos))
 	else:
 		hoveringSquare = Vector2i(-1, -1)
 	
