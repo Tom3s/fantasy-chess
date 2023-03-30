@@ -26,12 +26,15 @@ func spinDice(finalValue: int):
 	for i in animFrames.size():
 		var time = remap(i, 0, animFrames.size(), 0.005, 0.15)
 		tween.tween_property(self, "frame", animFrames[i], 0.0) 
-		var basePosition = position
-		tween.tween_property(self, "position", basePosition - Vector2(0, 50), 0.0) 
+		# var basePosition = position
+		# tween.tween_property(self, "position", basePosition - Vector2(0, 50), 0.0) 
 		# var baseRotation = randi_range(-30, 30)
-		tween.tween_property(self, "rotation_degrees", randi_range(-ROTATION_LIMIT, ROTATION_LIMIT), 0.0)
-		tween.tween_property(self, "rotation_degrees", 0.0, time) 
-		tween.parallel().tween_property(self, "position", basePosition, time).finished.connect(nextFrame)
+
+		# tween.tween_property(self, "rotation_degrees", randi_range(-ROTATION_LIMIT, ROTATION_LIMIT), 0.0)
+		# tween.tween_property(self, "rotation_degrees", 0.0, time) 
+		tween.tween_property(self, "rotation_degrees", rotation_degrees, time).from(randi_range(-ROTATION_LIMIT, ROTATION_LIMIT))
+
+		tween.parallel().tween_property(self, "position", position, time).from(position - Vector2(0, 50)).finished.connect(nextFrame)
 		# tween.tween_interval(time).finished.connect(nextFrame)
 	
 	tween.finished.connect(afterAnimation)

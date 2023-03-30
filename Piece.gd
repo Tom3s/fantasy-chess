@@ -25,8 +25,8 @@ func init(type: String, initialPosition: Vector2i, pieceColor: Color):
 
 	texturePath = "res://PieceScripts/" + pieceType + "/icon.png"
 	graphic = PieceGraphic.instantiate()
-	graphic.init(texturePath, pieceColor)
 	add_child(graphic)
+	graphic.init(texturePath, pieceColor)
 
 	dataPath = "res://PieceScripts/" + pieceType + "/data.json"
 	print(dataPath)
@@ -37,15 +37,15 @@ func init(type: String, initialPosition: Vector2i, pieceColor: Color):
 	attackStrength = data["attackStrength"]
 
 	health = HealthComponent.instantiate()
-	health.init(maxHealth)
 	add_child(health)
+	health.init(maxHealth)
 	
 
 	# moveClass = 
 	movePath = "res://PieceScripts/" + pieceType + "/MovementScript.gd"
 	move = MoveComponent.instantiate()
-	move.init(movePath, initialPosition, self)
 	add_child(move)
+	move.init(movePath, initialPosition, self)
 	pass
 
 # Called when the node enters the scene tree for the first time.

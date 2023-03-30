@@ -48,8 +48,8 @@ func init(initialName: String, initialPieceColor: Color, startingRow: int, piece
 			index += 1
 			continue
 		var piece := Piece.instantiate()
-		piece.init(pieceName, Vector2i(index, startingRow), pieceColor)
 		add_child(piece)
+		piece.init(pieceName, Vector2i(index, startingRow), pieceColor)
 		pieces.append(piece)
 
 		index += 1

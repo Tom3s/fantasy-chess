@@ -3,11 +3,11 @@ extends ProgressBar
 var healthSource: Callable = Callable(self, "placeHolder")
 var healthMax: Callable = Callable(self, "placeHolder")
 
-func init(source: Callable, max: Callable):
+func init(source: Callable, getMax: Callable):
 	healthSource = source
-	healthMax = max
+	healthMax = getMax
 
-	max_value = max.call()
+	max_value = getMax.call()
 
 	size = Vector2(180, 26)
 	position = Vector2(38, 250)

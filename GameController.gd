@@ -15,14 +15,14 @@ var defaultPieces: Array[String] = [PieceNames.PAWN, PieceNames.KNIGHT, PieceNam
 func _ready():
 	# player1
 	var player := Player.instantiate()
-	player.init("Cyan", Color.CYAN, 0, defaultPieces)
 	add_child(player)
+	player.init("Cyan", Color.CYAN, 0, defaultPieces)
 	players.append(player)
 
 	# player2
 	player = Player.instantiate()
-	player.init("Orange", Color.CORAL, GlobalVariables.BOARD_HEIGHT - 1, defaultPieces)
 	add_child(player)
+	player.init("Orange", Color.CORAL, GlobalVariables.BOARD_HEIGHT - 1, defaultPieces)
 	players.append(player)
 
 	currentPlayerIndex = 0
