@@ -10,6 +10,7 @@ var players: Array[Player]
 var board: Board
 var camera: Camera2D
 var dice: Dice
+var debugScreen: DebugScreen
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -32,8 +33,8 @@ func _ready():
 		push_warning("Board is null in Observer")
 	
 	camera = %Camera2D
-	
 	dice = %Dice
+	debugScreen = %DebugScreen
 
 	connectSignals()
 	connectPlayerSignals()
@@ -45,6 +46,8 @@ func connectSignals():
 	inputHandler.mouseMovedTo.connect(onInputHandler_mouseMoved)
 	inputHandler.centerCameraPressed.connect(onInputHandler_centerCameraPressed)
 	inputHandler.resetGamePressed.connect(onInputHandler_resetGamePressed)
+	inputHandler.fullScreenPressed.connect(onInputHandler_fullScreenPressed)
+	inputHandler.toggleDebugPressed.connect(onInputHandler_toggleDebugPressed)
 	gameController.waitingForRoll.connect(onGameController_waitingForRoll)
 	dice.atMiddle.connect(onDice_atMiddle)
 	dice.finishedRoll.connect(onDice_finishedRoll)
@@ -138,3 +141,16 @@ func onDice_atMiddle():
 func onDice_finishedRoll():
 	print("Observer: dice finished roll")
 	gameController.startCurrentPlayerTurn()
+
+func onInputHandler_fullScreenPressed():
+	print("Observer: full screen pressed")
+	var nextWindowMode = DisplayServer.window_get_mode()
+	if nextWindowMode == DisplayServer.WINDOW_MODE_WINDOWED:
+		nextWindowMode = DisplayServer.WINDOW_MODE_FULLSCREEN
+	else:
+		nextWindowMode = DisplayServer.WINDOW_MODE_WINDOWED
+	DisplayServer.window_set_mode(nextWindowMode)
+
+func onInputHandler_toggleDebugPressed():
+	print("Observer: toggle debug pressed")
+	debugScreen.toggleDebugScreen()

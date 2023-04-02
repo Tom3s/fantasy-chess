@@ -9,6 +9,8 @@ signal mouseClickedAt(position: Vector2i)
 signal mouseMovedTo(position: Vector2i)
 signal centerCameraPressed()
 signal resetGamePressed()
+signal fullScreenPressed()
+signal toggleDebugPressed()
 
 # func _ready():
 # 	# listen for mouse clicks
@@ -30,6 +32,10 @@ func _input(event: InputEvent):
 			centerCameraPressed.emit()
 		if event.is_action_pressed("resetGame"):
 			resetGamePressed.emit()
+		if event.is_action_pressed("fullScreen"):
+			fullScreenPressed.emit()
+		if event.is_action_pressed("toggleDebug"):
+			toggleDebugPressed.emit()
 
 func convertGlobalMousePositionToLocal(globalPosition: Vector2) -> Vector2i:
 	

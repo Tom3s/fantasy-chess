@@ -4,6 +4,8 @@ class_name DebugScreen
 
 var debugRows: Array[Callable]
 
+var enabled: bool = true
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	addFunctionToDisplay(Callable(%InputHandler, "debugLocalMousePosition"))
@@ -18,6 +20,9 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	if not enabled:
+		text = ''
+		return
 	var debugText: String = 'FPS: ' + str(Engine.get_frames_per_second()) + '\n'
 	for function in debugRows:
 		debugText += function.call() + '\n'
@@ -25,3 +30,6 @@ func _process(delta):
 
 func addFunctionToDisplay(textFunction: Callable):
 	debugRows.append(textFunction)
+
+func toggleDebugScreen():
+	enabled = !enabled
