@@ -10,8 +10,7 @@ var diceSprite: DiceFrames
 signal atMiddle()
 signal finishedRoll()
 
-# var bagOfValues := [0, 1, 2, 3, 4, 5]
-var bagOfValues := [10]
+var bagOfValues := [0, 1, 2, 3, 4, 5]
 
 var bags = [[],[]]
 
