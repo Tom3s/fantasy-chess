@@ -45,6 +45,27 @@ static func getAvailableAttacks(position: Vector2i, maxCost: int, enemyOccupiedT
 static func calculateCost(position: Vector2i, targetPosition: Vector2i) -> int:
 	return 1
 
-static func targetTileAfterAttack(localPosition, targetPosition) -> Vector2i:
+static func targetTileAfterAttack(localPosition: Vector2i, targetPosition: Vector2i, occupiedTiles: Array[Vector2i]) -> Vector2i:
+	# This is kind of a mess, but mathematically this is correct
+	# Check res://notes/knight_attack.png for a visual representation and more clarity
+	# Check res://notes/knight_attack.md for a more detailed explanation
 	var normalizedDirection = (localPosition - targetPosition).sign()
-	return targetPosition + normalizedDirection
+	var potentialTargetPosition = targetPosition + normalizedDirection # diagonal to target
+	if potentialTargetPosition not in occupiedTiles:
+		return potentialTargetPosition
+	
+	potentialTargetPosition = targetPosition + Vector2i(normalizedDirection.x, 0) # horizontal to target
+	if potentialTargetPosition not in occupiedTiles:
+		return potentialTargetPosition
+	
+	potentialTargetPosition = targetPosition + Vector2i(0, normalizedDirection.y) # vertical to target
+	if potentialTargetPosition not in occupiedTiles:
+		return potentialTargetPosition
+	
+	var relativePosition = targetPosition - localPosition
+	var relativeLastTile = (relativePosition + normalizedDirection) * -2
+	potentialTargetPosition = targetPosition + relativeLastTile # next to local
+	if potentialTargetPosition not in occupiedTiles:
+		return potentialTargetPosition
+
+	return localPosition # stay in place if no other option

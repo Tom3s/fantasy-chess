@@ -66,8 +66,8 @@ func onMoved():
 	graphic.setToUnselected()
 	pass
 
-func onAttack(attackedPosition: Vector2i):
-	move.moveTo(move.targetTileAfterAttack(attackedPosition))
+func onAttack(attackedPosition: Vector2i, occupiedTiles: Array[Vector2i]):
+	move.moveTo(move.targetTileAfterAttack(attackedPosition, occupiedTiles))
 	onUnselected()
 	pass
 

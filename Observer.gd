@@ -111,7 +111,7 @@ func onPlayer_pieceDied(attackerPiece: Piece, deathPosition: Vector2i):
 
 func onPlayer_pieceTookDamage(attackerPiece: Piece, attackedPosition: Vector2i):
 	print("Observer: piece took damage ", attackerPiece, " position ", attackedPosition)
-	attackerPiece.onAttack(attackedPosition)
+	attackerPiece.onAttack(attackedPosition, gameController.getAllOccupiedTiles())
 
 func onPlayer_turnEnded():
 	print("Observer: turn ended")
