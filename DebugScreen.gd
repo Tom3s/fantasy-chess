@@ -14,6 +14,7 @@ func _ready():
 	addFunctionToDisplay(Callable(%GameController, "debugCurrentPlayer"))
 	addFunctionToDisplay(Callable(%Camera2D, "debugCameraPosition"))
 	addFunctionToDisplay(Callable(%Camera2D, "debugCameraZoom"))
+	addFunctionToDisplay(Callable(%Dice, "debugPlayerBags"))
 	
 	pass # Replace with function body.
 

@@ -1,7 +1,11 @@
+res://Observer.gd
+res://GameController.gd
+res://Player.gd
+res://PieceNames.gd
 res://Main.tscn
 res://Dice.tscn
 res://Piece.tscn
-res://Observer.gd
-res://InputHandler.gd
+res://Dice.gd
 res://DebugScreen.gd
-res://Player.gd
+res://Frames.gd
+res://InputHandler.gd

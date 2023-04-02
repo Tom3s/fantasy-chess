@@ -10,6 +10,10 @@ var diceSprite: DiceFrames
 signal atMiddle()
 signal finishedRoll()
 
+var bagOfValues := [0, 1, 2, 3, 4, 5]
+
+var bags = [[],[]]
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	diceSprite = %Frames
@@ -23,17 +27,32 @@ func _ready():
 func _process(delta):
 	pass
 
-func generateNewRoll():
-	return randi_range(0, 5)
+func generateNewRoll(playerIndex: int):
+	if bags[playerIndex].size() == 0:
+		bags[playerIndex] = bagOfValues.duplicate()
+		bags[playerIndex].shuffle()
+	
+	return bags[playerIndex].pop_back()
 
-func rollDice() -> int:
-	roll = generateNewRoll()
+	# return randi_range(0, 5)
+
+func rollDice(playerIndex: int) -> int:
+	roll = generateNewRoll(playerIndex)
 	diceSprite.spinDice(roll)
 	print("Rolled a " + str(roll + 1))
 	return roll + 1
 
 func getReadyToRoll():
 	diceSprite.goToMiddle()
+
+func debugPlayerBags() -> String:
+	var result = ""
+	for i in range(bags.size()):
+		result += "Player " + str(i) + ": " + str(bags[i].duplicate().map(func(x): return x + 1))
+		if !i:
+			result += "\n"
+	
+	return result
 
 # func _input(event: InputEvent):
 # 	if event.is_action_pressed("centerCamera"):

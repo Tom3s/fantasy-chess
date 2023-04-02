@@ -135,7 +135,7 @@ func onGameController_waitingForRoll():
 
 func onDice_atMiddle():
 	print("Observer: dice at middle")
-	gameController.currentRoll = dice.rollDice()
+	gameController.currentRoll = dice.rollDice(gameController.currentPlayerIndex)
 	
 
 func onDice_finishedRoll():
