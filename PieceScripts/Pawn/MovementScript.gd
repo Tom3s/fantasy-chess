@@ -18,7 +18,7 @@ static func getAvailableMoves(position: Vector2i, maxCost: int, occupiedTiles: A
 
     return availableMoves
 
-static func getAvailableAttacks(position: Vector2i, enemyOccupiedTiles: Array[Vector2i], allOccupiedTiles: Array[Vector2i]) -> Array[Vector2i]:
+static func getAvailableAttacks(position: Vector2i, maxCost: int, enemyOccupiedTiles: Array[Vector2i], allOccupiedTiles: Array[Vector2i]) -> Array[Vector2i]:
     var availableAttacks: Array[Vector2i] = []
     for x in [-1, 1]:
         for y in [-1, 1]:

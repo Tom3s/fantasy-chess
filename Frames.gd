@@ -8,10 +8,8 @@ const ROTATION_LIMIT = 15
 
 signal animationDone()
 signal changedFrame()
+signal arrivedAtMiddle()
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
 
 func spinDice(finalValue: int):
 	var tween = create_tween()
@@ -37,12 +35,30 @@ func spinDice(finalValue: int):
 		tween.parallel().tween_property(self, "position", position, time).from(position - Vector2(0, 50)).finished.connect(nextFrame)
 		# tween.tween_interval(time).finished.connect(nextFrame)
 	
-	tween.finished.connect(afterAnimation)
+	tween.tween_interval(1.0).finished.connect(afterAnimation)
+	# tween.finished.connect(afterAnimation)
 	
 func afterAnimation():
 	print("Dice Rolling animation done")
 	animationDone.emit()
+	goToCorner()
+	
 
 func nextFrame():
 	changedFrame.emit()
-	# print("next frame")
+
+
+func goToMiddle():
+	# var tween = create_tween()
+	var tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_EXPO)
+	tween.tween_property(self, "scale", Vector2.ONE, 0.5)
+	tween.parallel().tween_property(self, "position", get_viewport_rect().get_center(), 0.3).finished.connect(func(): arrivedAtMiddle.emit())
+
+func goToCorner():
+	var tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_EXPO)
+	tween.tween_property(self, "scale", scale * 0.5, 0.5)
+
+	var targetX = get_viewport_rect().size.x * 0.9
+	var targetY = get_viewport_rect().size.y * 0.9
+
+	tween.parallel().tween_property(self, "position", Vector2(targetX, targetY), 0.5)

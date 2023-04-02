@@ -10,6 +10,9 @@ var currentPlayerIndex: int
 
 var defaultPieces: Array[String] = [PieceNames.PAWN, PieceNames.KNIGHT, PieceNames.ROOK, PieceNames.BISHOP, PieceNames.QUEEN, PieceNames.ROOK, PieceNames.BISHOP, PieceNames.KNIGHT, PieceNames.PAWN]
 
+var currentRoll = 0
+
+signal waitingForRoll()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -27,7 +30,7 @@ func _ready():
 
 	currentPlayerIndex = 0
 
-	players[currentPlayerIndex].startTurn()
+	waitingForRoll.emit()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -46,6 +49,10 @@ func getEnemyPlayer() -> Player:
 
 func nextPlayer():
 	currentPlayerIndex = (currentPlayerIndex + 1) % players.size()
+	waitingForRoll.emit()
+	# players[currentPlayerIndex].startTurn()
+
+func startCurrentPlayerTurn():
 	players[currentPlayerIndex].startTurn()
 
 func getAllOccupiedTiles() -> Array[Vector2i]:
@@ -68,6 +75,6 @@ func resetGame():
 	for player in players:
 		player.queue_free()
 	players.clear()
-
+		
 	_ready()
 

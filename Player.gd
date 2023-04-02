@@ -21,6 +21,7 @@ var pieces: Array[Piece] = []
 var piecesInPlay: Array[String]
 
 var currentlySelectedPiece: Piece = null
+
 # signals
 signal pieceSelected(piece: Piece)
 signal pieceUnselected(piece: Piece)
@@ -34,13 +35,9 @@ signal pieceTookDamage(attacker: Piece, position: Vector2i)
 signal turnEnded()
 
 func init(initialName: String, initialPieceColor: Color, startingRow: int, piecesToPlay: Array[String]):
-	# print("default pieces: ", defaultPieces)
-	# piecesToPlay = [PieceNames.EMPTY, PieceNames.PAWN, PieceNames.EMPTY, PieceNames.BISHOP, PieceNames.BISHOP, PieceNames.EMPTY, PieceNames.PAWN]
 	playerName = initialName
 	pieceColor = initialPieceColor
-	print("pieces to play: ", piecesToPlay)
 	piecesInPlay = piecesToPlay
-	print("pieces in play: ", piecesInPlay)
 	
 	var index: int = 0
 	for pieceName in piecesInPlay:
@@ -58,10 +55,9 @@ func init(initialName: String, initialPieceColor: Color, startingRow: int, piece
 func _ready():
 	pass
 
-func onSelectingTile(tilePosition: Vector2i, allOccupiedTiles: Array[Vector2i], enemyOccupiedTiles: Array[Vector2i]):
+func onSelectingTile(tilePosition: Vector2i, maxCost: int,  allOccupiedTiles: Array[Vector2i], enemyOccupiedTiles: Array[Vector2i]):
 	if state == STATES.WAITING_FOR_PIECE_SELECTION:
 		for piece in pieces:
-			print(piece, " position: ", piece.move.localPosition)
 			if piece.move.localPosition == tilePosition:
 				currentlySelectedPiece = piece
 				pieceSelected.emit(piece)
@@ -83,14 +79,14 @@ func onSelectingTile(tilePosition: Vector2i, allOccupiedTiles: Array[Vector2i], 
 		if not GlobalVariables.isTilePositionValid(tilePosition):
 			invalidTargetTile.emit()
 		# reachable tile clicked
-		elif currentlySelectedPiece.move.getAvailableMoves(6, allOccupiedTiles).has(tilePosition):
+		elif currentlySelectedPiece.move.getAvailableMoves(maxCost, allOccupiedTiles).has(tilePosition):
 			currentlySelectedPiece.move.moveTo(tilePosition)
 			pieceMoved.emit(currentlySelectedPiece, tilePosition)
 			state = STATES.WAITING_FOR_TURN
 			turnEnded.emit()
 			currentlySelectedPiece = null
 		# attackable tile clicked
-		elif currentlySelectedPiece.move.getAvailableAttacks(enemyOccupiedTiles, allOccupiedTiles).has(tilePosition):
+		elif currentlySelectedPiece.move.getAvailableAttacks(maxCost, enemyOccupiedTiles, allOccupiedTiles).has(tilePosition):
 			pieceAttacked.emit(currentlySelectedPiece, tilePosition)
 			state = STATES.WAITING_FOR_TURN
 			turnEnded.emit()

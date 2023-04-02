@@ -29,7 +29,6 @@ func init(type: String, initialPosition: Vector2i, pieceColor: Color):
 	graphic.init(texturePath, pieceColor)
 
 	dataPath = "res://PieceScripts/" + pieceType + "/data.json"
-	print(dataPath)
 
 	var file := FileAccess.open(dataPath, FileAccess.READ)
 	var data = JSON.parse_string(file.get_as_text())
@@ -48,15 +47,6 @@ func init(type: String, initialPosition: Vector2i, pieceColor: Color):
 	move.init(movePath, initialPosition, self)
 	pass
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	# init()
-
-	# print(get_node("Graphic").skeleton)
-	pass
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
 
