@@ -64,7 +64,7 @@ environment = SubResource("Environment_2qs0o")
 [node name="Lights" type="Node2D" parent="WorldEnvironment"]
 
 [node name="PointLight2D" type="PointLight2D" parent="WorldEnvironment/Lights"]
-position = Vector2(507, 511)
+position = Vector2(502, 505)
 scale = Vector2(6.01563, 6.01563)
 color = Color(1, 0.654902, 0.470588, 1)
 energy = 0.45
@@ -72,7 +72,7 @@ shadow_enabled = true
 texture = ExtResource("8_vcwuj")
 
 [node name="PointLight2D2" type="PointLight2D" parent="WorldEnvironment/Lights"]
-position = Vector2(1789, 511)
+position = Vector2(1789, 506)
 scale = Vector2(6.01563, 6.01563)
 color = Color(1, 0.654902, 0.470588, 1)
 energy = 0.45
@@ -80,7 +80,7 @@ shadow_enabled = true
 texture = ExtResource("8_vcwuj")
 
 [node name="PointLight2D3" type="PointLight2D" parent="WorldEnvironment/Lights"]
-position = Vector2(1794, 2340)
+position = Vector2(1784, 1791)
 scale = Vector2(6.01563, 6.01563)
 color = Color(1, 0.654902, 0.470588, 1)
 energy = 0.45
@@ -88,7 +88,7 @@ shadow_enabled = true
 texture = ExtResource("8_vcwuj")
 
 [node name="PointLight2D4" type="PointLight2D" parent="WorldEnvironment/Lights"]
-position = Vector2(514, 2340)
+position = Vector2(509, 1791)
 scale = Vector2(6.01563, 6.01563)
 color = Color(1, 0.654902, 0.470588, 1)
 energy = 0.45

@@ -28,3 +28,4 @@ func damageTaken():
     var tween = create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_EXPO)
     tween.tween_interval(0.2)
     tween.tween_property(material, "shader_parameter/color", pieceColor, 0.5).from(Color.RED)
+    tween.parallel().tween_property(material, "shader_parameter/outline_color", Color.BLACK, 0.5).from(Color.INDIAN_RED)
