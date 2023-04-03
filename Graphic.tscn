@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://bt3ewaspdif5n"]
+[gd_scene load_steps=6 format=3 uid="uid://bt3ewaspdif5n"]
 
 [ext_resource type="Shader" path="res://SignedDistanceField.gdshader" id="1_acqh1"]
 [ext_resource type="Texture2D" uid="uid://bnal0y6bld4jd" path="res://PieceScripts/Pawn/icon.png" id="2_n6esg"]
 [ext_resource type="Script" path="res://Graphic.gd" id="3_fv6i2"]
+[ext_resource type="OccluderPolygon2D" uid="uid://b2f6driwfxlyl" path="res://PieceScripts/Pawn/occluder.tres" id="4_8diwy"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_f34yj"]
 resource_local_to_scene = true
@@ -17,6 +18,11 @@ shader_parameter/outline_softness = 0.008
 
 [node name="Graphic" type="Sprite2D"]
 material = SubResource("ShaderMaterial_f34yj")
+position = Vector2(1, -2)
 texture = ExtResource("2_n6esg")
 centered = false
 script = ExtResource("3_fv6i2")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+visible = false
+occluder = ExtResource("4_8diwy")

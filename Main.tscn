@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dhwg3qitra36w"]
+[gd_scene load_steps=10 format=3 uid="uid://dhwg3qitra36w"]
 
 [ext_resource type="Script" path="res://DebugScreen.gd" id="1_6akny"]
 [ext_resource type="PackedScene" uid="uid://c5nd1g44qt7ib" path="res://Dice.tscn" id="2_l6icf"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://33rmbwru2587" path="res://GameController.tscn" id="4_g8hs6"]
 [ext_resource type="PackedScene" uid="uid://1eh2s5xbr48s" path="res://InputHandler.tscn" id="5_4l2kj"]
 [ext_resource type="Script" path="res://Observer.gd" id="6_dwiah"]
+[ext_resource type="Texture2D" uid="uid://qwo0pu1g0h0e" path="res://Sprites/light.png" id="8_vcwuj"]
 
 [sub_resource type="Environment" id="Environment_2qs0o"]
 
@@ -46,3 +47,45 @@ script = ExtResource("6_dwiah")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_2qs0o")
+
+[node name="Lights" type="Node2D" parent="WorldEnvironment"]
+
+[node name="PointLight2D" type="PointLight2D" parent="WorldEnvironment/Lights"]
+position = Vector2(509, -28)
+scale = Vector2(6.01563, 6.01563)
+color = Color(1, 0.654902, 0.470588, 1)
+energy = 0.45
+shadow_enabled = true
+texture = ExtResource("8_vcwuj")
+
+[node name="PointLight2D2" type="PointLight2D" parent="WorldEnvironment/Lights"]
+position = Vector2(1789, -38)
+scale = Vector2(6.01563, 6.01563)
+color = Color(1, 0.654902, 0.470588, 1)
+energy = 0.45
+shadow_enabled = true
+texture = ExtResource("8_vcwuj")
+
+[node name="PointLight2D3" type="PointLight2D" parent="WorldEnvironment/Lights"]
+position = Vector2(1794, 2340)
+scale = Vector2(6.01563, 6.01563)
+color = Color(1, 0.654902, 0.470588, 1)
+energy = 0.45
+shadow_enabled = true
+texture = ExtResource("8_vcwuj")
+
+[node name="PointLight2D4" type="PointLight2D" parent="WorldEnvironment/Lights"]
+position = Vector2(514, 2340)
+scale = Vector2(6.01563, 6.01563)
+color = Color(1, 0.654902, 0.470588, 1)
+energy = 0.45
+shadow_enabled = true
+texture = ExtResource("8_vcwuj")
+
+[node name="PointLight2D5" type="PointLight2D" parent="WorldEnvironment/Lights"]
+visible = false
+position = Vector2(1118, 1151)
+scale = Vector2(6.01563, 6.01563)
+energy = 0.45
+shadow_enabled = true
+texture = ExtResource("8_vcwuj")

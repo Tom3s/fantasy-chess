@@ -27,4 +27,4 @@ func setColor(newColor: Color):
 func damageTaken():
     var tween = create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_EXPO)
     tween.tween_interval(0.2)
-    tween.tween_property(material, "shader_parameter/color", pieceColor, 0.7).from(Color.RED)
+    tween.tween_property(material, "shader_parameter/color", pieceColor, 0.5).from(Color.RED)

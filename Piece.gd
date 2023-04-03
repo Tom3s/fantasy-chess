@@ -16,6 +16,7 @@ var texturePath: String
 var health: HealthComponent
 var move: MoveComponent
 var graphic: PieceGraphic
+var lightOccluder: LightOccluder2D
 var attackStrength: int
 
 var isSelected: bool = false
@@ -45,6 +46,12 @@ func init(type: String, initialPosition: Vector2i, pieceColor: Color):
 	move = MoveComponent.instantiate()
 	add_child(move)
 	move.init(movePath, initialPosition, self)
+
+
+	var occluderPath = "res://PieceScripts/" + pieceType + "/occluder.tres"
+	lightOccluder = LightOccluder2D.new()
+	lightOccluder.occluder = ResourceLoader.load(occluderPath)
+	add_child(lightOccluder)
 
 	graphic.attackAnimationDone.connect(onAttackAnimationDone)
 

@@ -15,3 +15,5 @@ res://GlobalVariables.gd
 res://Observer.gd
 res://Frames.gd
 res://HealthComponent.gd
+res://PieceScripts/Pawn/occluder.tres
+res://PieceScripts/Rook/occluder.tres
