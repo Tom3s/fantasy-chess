@@ -33,10 +33,6 @@ func _ready():
 	waitingForRoll.emit()
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
-
 func getAllPlayers() -> Array[Player]:
 	return players
 
@@ -70,6 +66,12 @@ func getEnemyPlayerOccupiedTiles() -> Array[Vector2i]:
 
 func debugCurrentPlayer() -> String:
 	return "Current player: " + str(currentPlayerIndex) + " - " + players[currentPlayerIndex].playerName
+
+func getEnemyPieceAt(tile: Vector2i) -> Piece:
+	var enemyPlayerIndex := (currentPlayerIndex + 1) % players.size()
+	var enemyPiece = players[enemyPlayerIndex].pieces.filter(func(a: Piece): return a.move.localPosition == tile)
+	# print("Enemy piece at " + str(tile) + ": " + str(enemyPiece))
+	return enemyPiece.front() if enemyPiece.size() > 0 else null
 
 func resetGame():
 	for player in players:

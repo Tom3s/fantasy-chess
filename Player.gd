@@ -73,6 +73,14 @@ func onSelectingTile(tilePosition: Vector2i, maxCost: int,  allOccupiedTiles: Ar
 				pieceUnselected.emit(currentlySelectedPiece)
 				currentlySelectedPiece = null
 				return
+			else:
+				# select another piece
+				for piece in pieces:
+					if piece.move.localPosition == tilePosition:
+						pieceUnselected.emit(currentlySelectedPiece)
+						currentlySelectedPiece = piece
+						pieceSelected.emit(piece)
+						return
 		
 		
 		# outside of board clicked

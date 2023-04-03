@@ -17,3 +17,6 @@ res://Frames.gd
 res://HealthComponent.gd
 res://PieceScripts/Pawn/occluder.tres
 res://PieceScripts/Rook/occluder.tres
+res://MouseHover.gd
+res://Camera2D.gd
+res://GameController.gd

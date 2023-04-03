@@ -11,6 +11,7 @@ var board: Board
 var camera: Camera2D
 var dice: Dice
 var debugScreen: DebugScreen
+var mouseHover: Label
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -35,6 +36,8 @@ func _ready():
 	camera = %Camera2D
 	dice = %Dice
 	debugScreen = %DebugScreen
+
+	mouseHover = %MouseHover
 
 	connectSignals()
 	connectPlayerSignals()
@@ -73,12 +76,16 @@ func onInputHandler_mouseClickedAt(mousePosition: Vector2i):
 
 func onInputHandler_mouseMoved(mousePosition: Vector2i):
 	board.setHoveringSquare(mousePosition)
+	mouseHover.setText(gameController.getEnemyPieceAt(mousePosition))
+
 
 func onPlayer_pieceSelected(piece: Piece):
 	print("Observer: piece selected: ", piece)
 	piece.onSelected()
+	var availableAttacks := piece.move.getAvailableAttacks(gameController.currentRoll, gameController.getEnemyPlayerOccupiedTiles(), gameController.getAllOccupiedTiles())
 	board.setReachableTiles(piece.move.getAvailableMoves(gameController.currentRoll, gameController.getAllOccupiedTiles()))
-	board.setAttackableTiles(piece.move.getAvailableAttacks(gameController.currentRoll, gameController.getEnemyPlayerOccupiedTiles(), gameController.getAllOccupiedTiles()))
+	board.setAttackableTiles(availableAttacks)
+	mouseHover.setAttacks(piece, availableAttacks)
 
 func onPlayer_pieceUnselected(piece: Piece):
 	print("Observer: piece unselected: ", piece)
@@ -115,6 +122,9 @@ func onPlayer_pieceTookDamage(attackerPiece: Piece, attackedPosition: Vector2i):
 
 func onPlayer_turnEnded():
 	print("Observer: turn ended")
+	var empty: Array[Vector2i] = [] 
+	mouseHover.setAttacks(null, empty)
+	mouseHover.clearText()
 	gameController.nextPlayer()
 
 

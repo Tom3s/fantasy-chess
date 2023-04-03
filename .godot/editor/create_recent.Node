@@ -1,3 +1,4 @@
+Label
 PointLight2D
 LightOccluder2D
 DirectionalLight2D
@@ -18,4 +19,3 @@ RichTextLabel
 Camera2D
 Piece
 ColorRect
-Label
