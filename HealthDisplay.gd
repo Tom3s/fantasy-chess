@@ -12,8 +12,8 @@ func init(source: Callable, getMax: Callable):
 
 	max_value = getMax.call()
 
-	size = Vector2(180, 26)
-	position = Vector2(38, 250)
+	# size = Vector2(180, 26)
+	# position = Vector2(38, 250)
 
 	textChild = %HealthText
 

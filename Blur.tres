@@ -1,0 +1,8 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://cvmuby3daflfx"]
+
+[ext_resource type="Shader" path="res://Blur.gdshader" id="1_tps58"]
+
+[resource]
+shader = ExtResource("1_tps58")
+shader_parameter/v = 1.0
+shader_parameter/size = 5.0

@@ -11,13 +11,12 @@ shader = ExtResource("1_acqh1")
 shader_parameter/thickness = 0.907
 shader_parameter/softness = 0.008
 shader_parameter/color = Color(1, 1, 1, 1)
-shader_parameter/outline_color = null
+shader_parameter/outline_color = Color(0, 0, 0, 1)
 shader_parameter/outline_thickness = 0.5
 shader_parameter/outline_softness = 0.008
 
 [node name="Graphic" type="Sprite2D"]
 material = SubResource("ShaderMaterial_w33u7")
-position = Vector2(1, -2)
 texture = ExtResource("2_n6esg")
 centered = false
 script = ExtResource("3_fv6i2")

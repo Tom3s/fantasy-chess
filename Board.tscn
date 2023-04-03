@@ -1,9 +1,16 @@
-[gd_scene load_steps=5 format=3 uid="uid://lorewu3d2211"]
+[gd_scene load_steps=7 format=3 uid="uid://lorewu3d2211"]
 
 [ext_resource type="Script" path="res://Board.gd" id="1_tx4oi"]
 [ext_resource type="Script" path="res://Border.gd" id="2_swle1"]
 [ext_resource type="Script" path="res://BoardBackground.gd" id="3_meucg"]
 [ext_resource type="Texture2D" uid="uid://bpbig2kwdr3bq" path="res://Sprites/background.png" id="3_uhr0s"]
+[ext_resource type="Shader" path="res://Scroll.gdshader" id="4_dugmx"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5l0as"]
+shader = ExtResource("4_dugmx")
+shader_parameter/motion = Vector2(15, 7)
+shader_parameter/scale = 1.0
+shader_parameter/offset = Vector2(0, 0)
 
 [node name="Board" type="Node2D"]
 script = ExtResource("1_tx4oi")
@@ -22,9 +29,10 @@ script = ExtResource("3_meucg")
 [node name="ParallaxLayer" type="ParallaxLayer" parent="BoardBackground"]
 position = Vector2(1500, 1000)
 motion_scale = Vector2(0.05, 0.05)
-motion_mirroring = Vector2(6000, 4000)
+motion_mirroring = Vector2(3900, 2600)
 
 [node name="Sprite2D" type="Sprite2D" parent="BoardBackground/ParallaxLayer"]
 texture_repeat = 2
-scale = Vector2(2, 2)
+material = SubResource("ShaderMaterial_5l0as")
+scale = Vector2(1.3, 1.3)
 texture = ExtResource("3_uhr0s")
