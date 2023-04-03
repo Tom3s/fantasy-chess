@@ -5,19 +5,18 @@
 [ext_resource type="Script" path="res://Graphic.gd" id="3_fv6i2"]
 [ext_resource type="OccluderPolygon2D" uid="uid://b2f6driwfxlyl" path="res://PieceScripts/Pawn/occluder.tres" id="4_8diwy"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_f34yj"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_w33u7"]
 resource_local_to_scene = true
-resource_name = "PieceTextureResource"
 shader = ExtResource("1_acqh1")
-shader_parameter/thickness = 0.904
+shader_parameter/thickness = 0.907
 shader_parameter/softness = 0.008
 shader_parameter/color = Color(1, 1, 1, 1)
-shader_parameter/outline_color = Color(0, 0, 0, 1)
+shader_parameter/outline_color = null
 shader_parameter/outline_thickness = 0.5
 shader_parameter/outline_softness = 0.008
 
 [node name="Graphic" type="Sprite2D"]
-material = SubResource("ShaderMaterial_f34yj")
+material = SubResource("ShaderMaterial_w33u7")
 position = Vector2(1, -2)
 texture = ExtResource("2_n6esg")
 centered = false

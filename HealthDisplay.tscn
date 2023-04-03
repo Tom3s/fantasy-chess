@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://djyh5k6ogb3gg"]
+[gd_scene load_steps=7 format=3 uid="uid://djyh5k6ogb3gg"]
 
 [ext_resource type="Script" path="res://HealthDisplay.gd" id="1_h4yfs"]
+[ext_resource type="Script" path="res://HealthText.gd" id="2_n15bp"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_duvue"]
 bg_color = Color(0.196078, 0.196078, 0.196078, 1)
@@ -23,6 +24,11 @@ ProgressBar/font_sizes/font_size = 19
 ProgressBar/styles/background = SubResource("StyleBoxFlat_duvue")
 ProgressBar/styles/fill = SubResource("StyleBoxFlat_1ejoq")
 
+[sub_resource type="LabelSettings" id="LabelSettings_r4lel"]
+font_size = 64
+outline_size = 20
+outline_color = Color(0, 0, 0, 1)
+
 [node name="HealthDisplay" type="ProgressBar"]
 anchors_preset = 5
 anchor_left = 0.5
@@ -35,4 +41,17 @@ mouse_filter = 2
 theme = SubResource("Theme_ojnaa")
 max_value = 5.0
 value = 2.24
+show_percentage = false
 script = ExtResource("1_h4yfs")
+
+[node name="HealthText" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 0
+offset_right = 603.0
+offset_bottom = 90.0
+scale = Vector2(0.3, 0.3)
+text = "HP: 3/7"
+label_settings = SubResource("LabelSettings_r4lel")
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("2_n15bp")

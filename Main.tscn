@@ -4,15 +4,12 @@
 [ext_resource type="PackedScene" uid="uid://c5nd1g44qt7ib" path="res://Dice.tscn" id="2_l6icf"]
 [ext_resource type="Script" path="res://MouseHover.gd" id="3_1rcaq"]
 [ext_resource type="Script" path="res://Camera2D.gd" id="3_fjq7j"]
+[ext_resource type="LabelSettings" uid="uid://esgslb7r51j0" path="res://LabelDefault.tres" id="3_lb4km"]
 [ext_resource type="PackedScene" uid="uid://lorewu3d2211" path="res://Board.tscn" id="3_sq1xj"]
 [ext_resource type="PackedScene" uid="uid://33rmbwru2587" path="res://GameController.tscn" id="4_g8hs6"]
 [ext_resource type="PackedScene" uid="uid://1eh2s5xbr48s" path="res://InputHandler.tscn" id="5_4l2kj"]
 [ext_resource type="Script" path="res://Observer.gd" id="6_dwiah"]
 [ext_resource type="Texture2D" uid="uid://qwo0pu1g0h0e" path="res://Sprites/light.png" id="8_vcwuj"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_nuisw"]
-font_color = Color(0, 0, 0, 1)
-outline_size = 5
 
 [sub_resource type="Environment" id="Environment_2qs0o"]
 
@@ -35,7 +32,7 @@ unique_name_in_owner = true
 offset_right = 126.0
 offset_bottom = 26.0
 text = "Attack: 3 (lethal)"
-label_settings = SubResource("LabelSettings_nuisw")
+label_settings = ExtResource("3_lb4km")
 script = ExtResource("3_1rcaq")
 
 [node name="Board" parent="." instance=ExtResource("3_sq1xj")]

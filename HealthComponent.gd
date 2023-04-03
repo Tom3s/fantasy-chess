@@ -31,6 +31,7 @@ func _ready():
 
 func takeDamage(amount: float) -> float:
 	currentHealth -= amount
+	healthDisplay.update()
 	parentPiece.onDamageTaken()
 	if currentHealth <= 0:
 		die()
