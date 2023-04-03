@@ -51,6 +51,7 @@ func nextFrame():
 func goToMiddle():
 	# var tween = create_tween()
 	var tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_EXPO)
+	tween.tween_interval(0.5)
 	tween.tween_property(self, "scale", Vector2.ONE, 0.5)
 	tween.parallel().tween_property(self, "position", get_viewport_rect().get_center(), 0.3).finished.connect(func(): arrivedAtMiddle.emit())
 

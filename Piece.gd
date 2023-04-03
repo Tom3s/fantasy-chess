@@ -37,7 +37,7 @@ func init(type: String, initialPosition: Vector2i, pieceColor: Color):
 
 	health = HealthComponent.instantiate()
 	add_child(health)
-	health.init(maxHealth)
+	health.init(maxHealth, self)
 	
 
 	# moveClass = 
@@ -45,33 +45,33 @@ func init(type: String, initialPosition: Vector2i, pieceColor: Color):
 	move = MoveComponent.instantiate()
 	add_child(move)
 	move.init(movePath, initialPosition, self)
-	pass
 
-func _process(delta):
-	pass
+	graphic.attackAnimationDone.connect(onAttackAnimationDone)
 
 
 func onSelected():
 	isSelected = true
 	graphic.setToSelected()
-	pass
 	
 func onUnselected():
 	isSelected = false
 	graphic.setToUnselected()
-	pass
 	
 func onMoved():
 	isSelected = false
 	graphic.setToUnselected()
-	pass
 
 func onAttack(attackedPosition: Vector2i, occupiedTiles: Array[Vector2i]):
-	move.moveTo(move.targetTileAfterAttack(attackedPosition, occupiedTiles))
+	var afterAttackTile = move.targetTileAfterAttack(attackedPosition, occupiedTiles)
+	graphic.playAttack(self, attackedPosition, afterAttackTile)
+
+func onDamageTaken():
+	graphic.playDamageTaken()
+
+func onAttackAnimationDone(afterAttackTile: Vector2i):
+	move.moveTo(afterAttackTile)
 	onUnselected()
-	pass
 
 func onKill(attackedPosition: Vector2i):
 	move.moveTo(attackedPosition)
 	onUnselected()
-	pass

@@ -9,9 +9,12 @@ var maxHealth: float = 69
 
 var healthDisplay = null
 
-func init(initialMaxHealth = 1) -> void:
+var parentPiece: Piece = null
+
+func init(initialMaxHealth, parent: Piece) -> void:
 	maxHealth = initialMaxHealth
 	currentHealth = maxHealth
+	parentPiece = parent
 	
 	healthDisplay = HealthDisplay.instantiate()
 	healthDisplay.init(Callable(self, "getHealth"), Callable(self, "getMaxHealth"))
@@ -19,16 +22,16 @@ func init(initialMaxHealth = 1) -> void:
 	
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	if healthDisplay == null:
-		init()
+	# if healthDisplay == null:
+	# 	init(null, null)
 	pass # Replace with function body.
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
+
 
 func takeDamage(amount: float) -> float:
 	currentHealth -= amount
+	parentPiece.onDamageTaken()
 	if currentHealth <= 0:
 		die()
 		return amount + currentHealth

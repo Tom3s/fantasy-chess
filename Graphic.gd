@@ -23,3 +23,8 @@ func setColor(newColor: Color):
     pieceColor = newColor
     material.set_shader_parameter("color", pieceColor)
     pass
+
+func damageTaken():
+    var tween = create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_EXPO)
+    tween.tween_interval(0.2)
+    tween.tween_property(material, "shader_parameter/color", pieceColor, 0.7).from(Color.RED)
