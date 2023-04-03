@@ -6,6 +6,7 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_f34yj"]
 resource_local_to_scene = true
+resource_name = "PieceTextureResource"
 shader = ExtResource("1_acqh1")
 shader_parameter/thickness = 0.904
 shader_parameter/softness = 0.008
