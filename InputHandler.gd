@@ -17,7 +17,7 @@ signal toggleDebugPressed()
 # 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 # 	Input.set_use_accumulated_input(false)
 
-func _input(event: InputEvent):
+func _unhandled_input(event: InputEvent):
 	if event is InputEventMouseMotion:
 		var newMousePosition = convertGlobalMousePositionToLocal(get_global_mouse_position())
 		if newMousePosition != localMousePosition:

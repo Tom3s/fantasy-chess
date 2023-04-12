@@ -90,7 +90,7 @@ func onPlayer_pieceSelected(piece: Piece):
 	board.setReachableTiles(piece.move.getAvailableMoves(gameController.currentRoll, gameController.getAllOccupiedTiles()))
 	board.setAttackableTiles(availableAttacks)
 	mouseHover.setAttacks(piece, availableAttacks)
-	abilityButton.disabled = !(piece.ability.canUseAbility() and gameController.currentRoll == 6)
+	abilityButton.disabled = !(piece.ability.canUseAbility(gameController.currentRoll))
 
 func onPlayer_pieceUnselected(piece: Piece):
 	print("Observer: piece unselected: ", piece)

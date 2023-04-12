@@ -13,5 +13,5 @@ func init(abilityScriptPath: String, parent: Piece):
 func useAbility():
 	abilityScript.use(parentPiece)
 
-func canUseAbility():
-	return abilityScript.canUse(parentPiece)
+func canUseAbility(diceRoll: int):
+	return abilityScript.canUse(parentPiece, diceRoll)

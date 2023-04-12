@@ -4,6 +4,8 @@ class_name PawnAbility
 
 const PawnPromotionSelector = preload("res://PawnPromotionSelector.tscn")
 
+const ABILITY_COST = 3
+
 static func use(parentPiece: Piece) -> void:
 	var promotionSelector = PawnPromotionSelector.instantiate()
 	
@@ -27,11 +29,14 @@ static func use(parentPiece: Piece) -> void:
 			parentPiece.abilityUsed.emit()
 	)
 
-static func canUse(parentPiece: Piece) -> bool:
+static func canUse(parentPiece: Piece, diceRoll: int) -> bool:
 	if !parentPiece.hasAbility:
 		return false
 	
-	return (parentPiece.move.localPosition.y == 0 and !parentPiece.startedAtTop) or (parentPiece.move.localPosition.y == GlobalVariables.BOARD_HEIGHT - 1 and parentPiece.startedAtTop)
+	return (
+		((parentPiece.move.localPosition.y == 0 and !parentPiece.startedAtTop) or
+		(parentPiece.move.localPosition.y == GlobalVariables.BOARD_HEIGHT - 1 and parentPiece.startedAtTop))
+		and diceRoll >= ABILITY_COST)
 
 func promotePawn(newPiece: String, parentPiece: Piece) -> void:
 	var oldHP := parentPiece.health.getHealth()

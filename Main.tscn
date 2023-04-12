@@ -56,8 +56,6 @@ script = ExtResource("5_s38pi")
 
 [node name="Board" parent="." instance=ExtResource("3_sq1xj")]
 z_index = -2
-width = 9
-height = 9
 darkColor = Color(0, 0.192157, 0.192157, 1)
 lightColor = Color(0.682353, 0.866667, 0.988235, 1)
 
