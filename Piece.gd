@@ -28,11 +28,13 @@ var attackStrength: int
 var isSelected: bool = false
 var hasAbility: bool = true
 
-func init(type: String, initialPosition: Vector2i, pieceColor: Color):
+var startedAtTop: bool = false
 
+func init(type: String, initialPosition: Vector2i, pieceColor: Color, initialStartAtTop: bool = false):
 	for child in get_children():
 		child.queue_free()
-
+		
+	startedAtTop = initialStartAtTop
 	pieceType = type
 
 	initialColor = pieceColor
@@ -61,10 +63,12 @@ func init(type: String, initialPosition: Vector2i, pieceColor: Color):
 
 
 	abilityPath = "res://PieceScripts/" + pieceType + "/AbilityScript.gd"
-	if ResourceLoader.exists(abilityPath):
+	hasAbility = false
+	if pieceType == PieceNames.PAWN:
 		ability = AbilityComponent.instantiate()
 		add_child(ability)
 		ability.init(abilityPath, self)
+		hasAbility = true
 
 	var occluderPath = "res://PieceScripts/" + pieceType + "/occluder.tres"
 	lightOccluder = LightOccluder2D.new()

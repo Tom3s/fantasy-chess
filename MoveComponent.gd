@@ -24,10 +24,13 @@ var classCalculateCost: Callable
 var parentPiece: Piece
 # var parentTargetPosition: Vector2
 
+var startingPosition: Vector2i
+
 func _ready():
 	parentPiece = Piece.new()
 
 func init(movementClassPath: String, initialPosition: Vector2i, parent: Piece):
+	startingPosition = initialPosition
 	parentPiece = parent
 	
 	localPosition = initialPosition

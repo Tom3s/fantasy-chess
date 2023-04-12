@@ -7,7 +7,7 @@ var parentPiece: Piece
 
 signal promotionPieceSelected(piece: String, parent: Piece)
 
-func _init(piece: Piece):
+func init(piece: Piece):
 	parentPiece = piece
 	print("Promotion Selector initialized")
 	pass

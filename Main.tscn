@@ -17,6 +17,7 @@
 [node name="Main" type="Node2D"]
 
 [node name="UI" type="CanvasLayer" parent="."]
+unique_name_in_owner = true
 
 [node name="DebugScreen" type="RichTextLabel" parent="UI"]
 unique_name_in_owner = true
@@ -48,12 +49,12 @@ grow_horizontal = 0
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 7
 theme_override_font_sizes/font_size = 22
+disabled = true
 text = "Use Ability"
 alignment = 0
 script = ExtResource("5_s38pi")
 
 [node name="Board" parent="." instance=ExtResource("3_sq1xj")]
-visible = false
 z_index = -2
 width = 7
 height = 8

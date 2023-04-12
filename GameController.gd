@@ -8,7 +8,7 @@ var players: Array[Player]
 
 var currentPlayerIndex: int
 
-var defaultPieces: Array[String] = [PieceNames.KNIGHT, PieceNames.ROOK, PieceNames.BISHOP, PieceNames.QUEEN, PieceNames.ROOK, PieceNames.BISHOP, PieceNames.KNIGHT]
+var defaultPieces: Array[String] = [PieceNames.KNIGHT, PieceNames.KNIGHT, PieceNames.ROOK, PieceNames.ROOK, PieceNames.BISHOP, PieceNames.BISHOP, PieceNames.QUEEN, PieceNames.PAWN, PieceNames.PAWN]
 
 var currentRoll = 0
 
@@ -32,6 +32,8 @@ func _ready():
 
 	waitingForRoll.emit()
 
+func getRandomStartingConfig() -> Array[String]:
+	
 
 func getAllPlayers() -> Array[Player]:
 	return players

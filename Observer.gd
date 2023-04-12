@@ -57,7 +57,7 @@ func connectSignals():
 	gameController.waitingForRoll.connect(onGameController_waitingForRoll)
 	dice.atMiddle.connect(onDice_atMiddle)
 	dice.finishedRoll.connect(onDice_finishedRoll)
-	abilityButton.pressed.connect(onAbilityButton_pressed)
+	abilityButton.button_down.connect(onAbilityButton_pressed)
 
 func connectPlayerSignals():
 	for player in players:
@@ -90,12 +90,14 @@ func onPlayer_pieceSelected(piece: Piece):
 	board.setReachableTiles(piece.move.getAvailableMoves(gameController.currentRoll, gameController.getAllOccupiedTiles()))
 	board.setAttackableTiles(availableAttacks)
 	mouseHover.setAttacks(piece, availableAttacks)
+	abilityButton.disabled = !piece.ability.canUseAbility() and gameController.currentRoll == 6
 
 func onPlayer_pieceUnselected(piece: Piece):
 	print("Observer: piece unselected: ", piece)
 	piece.onUnselected()
 	board.clearInteractableTiles()
 	mouseHover.clearText()
+	abilityButton.disabled = true
 	
 func onPlayer_pieceMoved(piece: Piece, newPosition: Vector2i):
 	print("Observer: piece moved: ", piece, " to ", newPosition)

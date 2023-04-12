@@ -18,7 +18,7 @@ var pieceColor: Color = Color.LIGHT_BLUE
 
 var pieces: Array[Piece] = []
 
-var piecesInPlay: Array[String]
+# var piecesInPlay: Array[String]
 
 var currentlySelectedPiece: Piece = null
 
@@ -34,32 +34,41 @@ signal pieceDied(attacker: Piece, position: Vector2i)
 signal pieceTookDamage(attacker: Piece, position: Vector2i)
 signal turnEnded()
 
-func init(initialName: String, initialPieceColor: Color, startingRow: int, piecesToPlay: Array[String]):
+func init(initialName: String, initialPieceColor: Color, startingRow: int, mainRow: Array[String], secondaryRow: Array[String]):
 	playerName = initialName
 	pieceColor = initialPieceColor
-	piecesInPlay = piecesToPlay
+	# piecesInPlay = mainRow
+	# piecesInPlay.append_array(secondaryRow)
+
+	var startedAtTop := startingRow == 0
 	
 	var index: int = 0
-	for pieceName in piecesInPlay:
+	for pieceName in mainRow:
 		if pieceName == PieceNames.EMPTY:
 			index += 1
 			continue
 		var piece := Piece.instantiate()
 		add_child(piece)
-		piece.init(pieceName, Vector2i(index, startingRow), pieceColor)
+		piece.init(pieceName, Vector2i(index, startingRow), pieceColor, startedAtTop)
 		pieces.append(piece)
 
 		index += 1
+	
 	
 	var pawnRow = startingRow + 1
 	if startingRow != 0:
 		pawnRow = startingRow - 1
 	
-	for i in piecesToPlay.size():
+	for pieceName in secondaryRow:
+		if pieceName == PieceNames.EMPTY:
+			index += 1
+			continue
 		var piece := Piece.instantiate()
 		add_child(piece)
-		piece.init(PieceNames.PAWN, Vector2i(i, pawnRow), pieceColor)
+		piece.init(pieceName, Vector2i(index, pawnRow), pieceColor, startedAtTop)
 		pieces.append(piece)
+
+		index += 1
 
 func _ready():
 	pass
@@ -141,7 +150,9 @@ func usePieceAbility():
 
 func onPieceAbilityUsed():
 	pieceUnselected.emit(currentlySelectedPiece)
-	pieceSelected.emit(currentlySelectedPiece)
+	currentlySelectedPiece = null
+	state = STATES.WAITING_FOR_TURN
+	turnEnded.emit()
 
 
 
