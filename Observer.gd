@@ -12,7 +12,7 @@ var camera: Camera2D
 var dice: Dice
 var debugScreen: DebugScreen
 var mouseHover: Label
-var abilityButton: Button
+var abilityButton: UseAbilityButton
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -44,6 +44,7 @@ func _ready():
 	connectSignals()
 	connectPlayerSignals()
 
+	onInputHandler_resetGamePressed()
 	# Connect signals
 
 func connectSignals():
@@ -163,6 +164,7 @@ func onInputHandler_fullScreenPressed():
 	else:
 		nextWindowMode = DisplayServer.WINDOW_MODE_WINDOWED
 	DisplayServer.window_set_mode(nextWindowMode)
+	abilityButton.updatePosition()
 
 func onInputHandler_toggleDebugPressed():
 	print("Observer: toggle debug pressed")

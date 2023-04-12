@@ -1,3 +1,4 @@
+@tool
 extends Node2D
 
 class_name PawnPromotionSelector
@@ -10,6 +11,9 @@ func _init(piece: Piece):
 	parentPiece = piece
 	print("Promotion Selector initialized")
 	pass
+
+func _process(delta):
+	position = get_viewport_rect().get_center()
 
 func _unhandled_input(event: InputEvent):
 	if event is InputEventKey:

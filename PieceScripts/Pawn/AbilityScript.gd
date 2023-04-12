@@ -5,7 +5,7 @@ class_name PawnAbility
 static func use(parentPiece: Piece) -> void:
 	var promotionSelector = PawnPromotionSelector.new(parentPiece)
 
-	parentPiece.add_child(promotionSelector)
+	parentPiece.get_parent().add_child(promotionSelector)
 
 	promotionSelector.promotionPieceSelected.connect(
 		func(newPiece: String, parentPiece: Piece):
