@@ -43,3 +43,5 @@ func setAttacks(attacker: Piece, tiles: Array[Vector2i]) -> void:
 
 func clearText() -> void:
 	text = ""
+	enemyOccupiedTiles.clear()
+	attackerPiece = null
