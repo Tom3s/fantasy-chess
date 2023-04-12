@@ -134,6 +134,7 @@ func onPlayer_turnEnded():
 	mouseHover.clearText()
 	gameController.nextPlayer()
 	abilityButton.disabled = true
+	board.updateBorderColor(Color.from_string("#1b1b1b", Color(0, 0, 0, 0)))
 
 
 func onInputHandler_centerCameraPressed():
@@ -146,13 +147,13 @@ func onInputHandler_resetGamePressed():
 	gameController.resetGame()
 	camera.centerCamera()
 	players = gameController.getAllPlayers()
-	board.updateBorderColor(gameController.getCurrentPlayer().pieceColor.darkened(0.5))
+	board.updateBorderColor(Color.from_string("#1b1b1b", Color(0, 0, 0, 0)))
+	dice.resetBags()
 	connectPlayerSignals()
 
 func onGameController_waitingForRoll():
 	print("Observer: waiting for roll")
 	dice.getReadyToRoll()
-	board.updateBorderColor(Color.from_string("#1b1b1b", Color(0, 0, 0, 0)))
 
 
 func onDice_atMiddle():
@@ -163,7 +164,7 @@ func onDice_atMiddle():
 func onDice_finishedRoll():
 	print("Observer: dice finished roll")
 	gameController.startCurrentPlayerTurn()
-	board.updateBorderColor(gameController.getCurrentPlayer().pieceColor.darkened(0.5))
+	board.updateBorderColor(gameController.getCurrentPlayer().pieceColor.darkened(0.4))
 
 func onInputHandler_fullScreenPressed():
 	print("Observer: full screen pressed")

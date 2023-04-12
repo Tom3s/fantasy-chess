@@ -20,14 +20,14 @@ func _ready():
 	var player1Pieces = getRandomMainRow()
 	var player := Player.instantiate()
 	add_child(player)
-	player.init("Cyan", Color.CYAN, 0, player1Pieces, getRandomSecondaryRow(player1Pieces))
+	player.init("Pink", Color.MEDIUM_VIOLET_RED, 0, player1Pieces, getRandomSecondaryRow(player1Pieces))
 	players.append(player)
 
 	# player2
 	var player2Pieces = getRandomMainRow()
 	player = Player.instantiate()
 	add_child(player)
-	player.init("Orange", Color.CORAL, GlobalVariables.BOARD_HEIGHT - 1, player2Pieces, getRandomSecondaryRow(player2Pieces))
+	player.init("Blue", Color.DEEP_SKY_BLUE, GlobalVariables.BOARD_HEIGHT - 1, player2Pieces, getRandomSecondaryRow(player2Pieces))
 	players.append(player)
 
 	currentPlayerIndex = 0

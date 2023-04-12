@@ -54,6 +54,9 @@ func debugPlayerBags() -> String:
 	
 	return result
 
+func resetBags():
+	bags = [[],[]]
+
 # func _input(event: InputEvent):
 # 	if event.is_action_pressed("centerCamera"):
 # 		position = get_viewport_rect().size / 2

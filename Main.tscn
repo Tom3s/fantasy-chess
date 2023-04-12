@@ -58,6 +58,8 @@ script = ExtResource("5_s38pi")
 z_index = -2
 width = 9
 height = 9
+darkColor = Color(0, 0.192157, 0.192157, 1)
+lightColor = Color(0.682353, 0.866667, 0.988235, 1)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 unique_name_in_owner = true

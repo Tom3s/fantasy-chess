@@ -31,7 +31,7 @@ static func canUse(parentPiece: Piece) -> bool:
 	if !parentPiece.hasAbility:
 		return false
 	
-	return (parentPiece.move.localPosition.y == 0 and parentPiece.startedAtTop) or (parentPiece.move.localPosition.y == GlobalVariables.BOARD_HEIGHT - 1 and !parentPiece.startedAtTop)
+	return (parentPiece.move.localPosition.y == 0 and !parentPiece.startedAtTop) or (parentPiece.move.localPosition.y == GlobalVariables.BOARD_HEIGHT - 1 and parentPiece.startedAtTop)
 
 func promotePawn(newPiece: String, parentPiece: Piece) -> void:
 	var oldHP := parentPiece.health.getHealth()
