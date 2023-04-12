@@ -95,6 +95,7 @@ func onPlayer_pieceUnselected(piece: Piece):
 	print("Observer: piece unselected: ", piece)
 	piece.onUnselected()
 	board.clearInteractableTiles()
+	mouseHover.clearText()
 	
 func onPlayer_pieceMoved(piece: Piece, newPosition: Vector2i):
 	print("Observer: piece moved: ", piece, " to ", newPosition)
