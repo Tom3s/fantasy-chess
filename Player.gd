@@ -133,6 +133,15 @@ func takeDamageAtTile(attackerPiece: Piece, tilePosition: Vector2i):
 				pieceTookDamage.emit(attackerPiece, tilePosition)
 			break
 
+func usePieceAbility():
+	if currentlySelectedPiece != null:
+		currentlySelectedPiece.abilityUsed.connect(onPieceAbilityUsed)
+		currentlySelectedPiece.onUseAbility()
+		
+
+func onPieceAbilityUsed():
+	pieceUnselected.emit(currentlySelectedPiece)
+	pieceSelected.emit(currentlySelectedPiece)
 
 
 

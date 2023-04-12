@@ -4,7 +4,8 @@ class_name HealthComponent
 
 const HealthDisplay := preload("res://HealthDisplay.tscn")
 
-var currentHealth: float		
+var currentHealth: float
+
 var maxHealth: float = 69
 
 var healthDisplay = null
@@ -51,6 +52,10 @@ func heal(amount: float) -> float:
 
 func getHealth() -> float:
 	return currentHealth
+
+func setHealth(amount: float) -> void:
+	currentHealth = amount
+	healthDisplay.update()
 
 func getMaxHealth() -> float:
 	return maxHealth

@@ -5,6 +5,9 @@ class_name Piece
 const HealthComponent := preload("res://HealthComponent.tscn")
 const MoveComponent := preload("res://MoveComponent.tscn")
 const PieceGraphic := preload("res://PieceGraphic.tscn")
+const AbilityComponent := preload("res://AbilityComponent.tscn")
+
+signal abilityUsed()
 
 @export
 var pieceType: String
@@ -12,18 +15,27 @@ var pieceType: String
 var dataPath: String
 var movePath: String
 var texturePath: String
+var abilityPath: String
 
 var health: HealthComponent
 var move: MoveComponent
+var ability: AbilityComponent
 var graphic: PieceGraphic
+var initialColor: Color
 var lightOccluder: LightOccluder2D
 var attackStrength: int
 
 var isSelected: bool = false
+var hasAbility: bool = true
 
 func init(type: String, initialPosition: Vector2i, pieceColor: Color):
+
+	for child in get_children():
+		child.queue_free()
+
 	pieceType = type
 
+	initialColor = pieceColor
 	texturePath = "res://PieceScripts/" + pieceType + "/icon.png"
 	graphic = PieceGraphic.instantiate()
 	add_child(graphic)
@@ -47,6 +59,12 @@ func init(type: String, initialPosition: Vector2i, pieceColor: Color):
 	add_child(move)
 	move.init(movePath, initialPosition, self)
 
+
+	abilityPath = "res://PieceScripts/" + pieceType + "/AbilityScript.gd"
+	if ResourceLoader.exists(abilityPath):
+		ability = AbilityComponent.instantiate()
+		add_child(ability)
+		ability.init(abilityPath, self)
 
 	var occluderPath = "res://PieceScripts/" + pieceType + "/occluder.tres"
 	lightOccluder = LightOccluder2D.new()
@@ -82,3 +100,8 @@ func onAttackAnimationDone(afterAttackTile: Vector2i):
 func onKill(attackedPosition: Vector2i):
 	move.moveTo(attackedPosition)
 	onUnselected()
+
+func onUseAbility():
+	hasAbility = false
+	ability.useAbility()
+

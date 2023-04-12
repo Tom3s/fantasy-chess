@@ -1,0 +1,23 @@
+[gd_scene load_steps=2 format=3 uid="uid://dgwqsc0i07lye"]
+
+[ext_resource type="Script" path="res://PawnPromotionSelector.gd" id="1_6va7p"]
+
+[node name="PawnPromotionSelector" type="Node2D"]
+z_index = 5
+script = ExtResource("1_6va7p")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+offset_left = 467.0
+offset_top = 217.0
+offset_right = 637.0
+offset_bottom = 412.0
+
+[node name="Label" type="Label" parent="PanelContainer"]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 25
+text = "1. Queen
+2. Rook
+3. Bishop
+4. Knight"

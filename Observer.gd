@@ -12,6 +12,7 @@ var camera: Camera2D
 var dice: Dice
 var debugScreen: DebugScreen
 var mouseHover: Label
+var abilityButton: Button
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -36,6 +37,7 @@ func _ready():
 	camera = %Camera2D
 	dice = %Dice
 	debugScreen = %DebugScreen
+	abilityButton = %UseAbilityButton
 
 	mouseHover = %MouseHover
 
@@ -54,6 +56,7 @@ func connectSignals():
 	gameController.waitingForRoll.connect(onGameController_waitingForRoll)
 	dice.atMiddle.connect(onDice_atMiddle)
 	dice.finishedRoll.connect(onDice_finishedRoll)
+	abilityButton.pressed.connect(onAbilityButton_pressed)
 
 func connectPlayerSignals():
 	for player in players:
@@ -164,3 +167,7 @@ func onInputHandler_fullScreenPressed():
 func onInputHandler_toggleDebugPressed():
 	print("Observer: toggle debug pressed")
 	debugScreen.toggleDebugScreen()
+
+func onAbilityButton_pressed():
+	print("Observer: ability button pressed")
+	gameController.getCurrentPlayer().usePieceAbility()

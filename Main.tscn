@@ -35,6 +35,17 @@ text = "Attack: 3 (lethal)"
 label_settings = ExtResource("3_lb4km")
 script = ExtResource("3_1rcaq")
 
+[node name="UseAbilityButton" type="Button" parent="UI"]
+unique_name_in_owner = true
+offset_left = 992.0
+offset_top = 38.0
+offset_right = 1114.0
+offset_bottom = 77.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 7
+theme_override_font_sizes/font_size = 22
+text = "Use Ability"
+
 [node name="Board" parent="." instance=ExtResource("3_sq1xj")]
 z_index = -2
 width = 7
