@@ -1,5 +1,7 @@
 extends Polygon2D
 
+class_name Border
+
 const BORDER_SIZE = 128
 
 # Called when the node enters the scene tree for the first time.
@@ -12,7 +14,7 @@ func _ready():
 	]
 	pass # Replace with function body.
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
+func updateColor(newColor: Color):
+	var tween = create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_ELASTIC)
+	# color = newColor
+	tween.tween_property(self, "color", newColor, 0.5)

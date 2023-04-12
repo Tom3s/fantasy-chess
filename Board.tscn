@@ -18,6 +18,7 @@ width = 3
 height = 3
 
 [node name="Border" type="Polygon2D" parent="."]
+unique_name_in_owner = true
 z_index = -1
 color = Color(0.105882, 0.105882, 0.105882, 1)
 script = ExtResource("2_swle1")

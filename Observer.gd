@@ -142,14 +142,18 @@ func onInputHandler_centerCameraPressed():
 
 func onInputHandler_resetGamePressed():
 	print("Observer: reset game pressed")
+	board.clearInteractableTiles()
 	gameController.resetGame()
 	camera.centerCamera()
 	players = gameController.getAllPlayers()
+	board.updateBorderColor(gameController.getCurrentPlayer().pieceColor.darkened(0.5))
 	connectPlayerSignals()
 
 func onGameController_waitingForRoll():
 	print("Observer: waiting for roll")
 	dice.getReadyToRoll()
+	board.updateBorderColor(Color.from_string("#1b1b1b", Color(0, 0, 0, 0)))
+
 
 func onDice_atMiddle():
 	print("Observer: dice at middle")
@@ -159,6 +163,7 @@ func onDice_atMiddle():
 func onDice_finishedRoll():
 	print("Observer: dice finished roll")
 	gameController.startCurrentPlayerTurn()
+	board.updateBorderColor(gameController.getCurrentPlayer().pieceColor.darkened(0.5))
 
 func onInputHandler_fullScreenPressed():
 	print("Observer: full screen pressed")

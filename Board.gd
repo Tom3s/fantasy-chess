@@ -116,3 +116,6 @@ func clearInteractableTiles() -> void:
 func debugReachableTiles() -> String:
 	return "Reachable tiles: " + str(reachableTiles)
 
+func updateBorderColor(newColor: Color) -> void:
+	var borderNode := %Border
+	borderNode.updateColor(newColor)
