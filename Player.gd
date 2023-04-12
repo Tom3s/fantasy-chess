@@ -59,6 +59,8 @@ func init(initialName: String, initialPieceColor: Color, startingRow: int, mainR
 	if startingRow != 0:
 		pawnRow = startingRow - 1
 	
+
+	index = 0
 	for pieceName in secondaryRow:
 		if pieceName == PieceNames.EMPTY:
 			index += 1

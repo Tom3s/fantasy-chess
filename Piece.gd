@@ -64,11 +64,10 @@ func init(type: String, initialPosition: Vector2i, pieceColor: Color, initialSta
 
 	abilityPath = "res://PieceScripts/" + pieceType + "/AbilityScript.gd"
 	hasAbility = false
-	if pieceType == PieceNames.PAWN:
-		ability = AbilityComponent.instantiate()
-		add_child(ability)
-		ability.init(abilityPath, self)
-		hasAbility = true
+	ability = AbilityComponent.instantiate()
+	add_child(ability)
+	ability.init(abilityPath, self)
+	hasAbility = true
 
 	var occluderPath = "res://PieceScripts/" + pieceType + "/occluder.tres"
 	lightOccluder = LightOccluder2D.new()

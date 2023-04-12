@@ -17,23 +17,47 @@ signal waitingForRoll()
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	# player1
+	var player1Pieces = getRandomMainRow()
 	var player := Player.instantiate()
 	add_child(player)
-	player.init("Cyan", Color.CYAN, 0, defaultPieces)
+	player.init("Cyan", Color.CYAN, 0, player1Pieces, getRandomSecondaryRow(player1Pieces))
 	players.append(player)
 
 	# player2
+	var player2Pieces = getRandomMainRow()
 	player = Player.instantiate()
 	add_child(player)
-	player.init("Orange", Color.CORAL, GlobalVariables.BOARD_HEIGHT - 1, defaultPieces)
+	player.init("Orange", Color.CORAL, GlobalVariables.BOARD_HEIGHT - 1, player2Pieces, getRandomSecondaryRow(player2Pieces))
 	players.append(player)
 
 	currentPlayerIndex = 0
 
 	waitingForRoll.emit()
 
-func getRandomStartingConfig() -> Array[String]:
+func getRandomMainRow() -> Array[String]:
+	var mainRow = defaultPieces.duplicate()
+	mainRow.shuffle()
+	var firstBishopIndex = mainRow.find(PieceNames.BISHOP)
+	var secondBishopIndex = mainRow.find(PieceNames.BISHOP, firstBishopIndex + 1)
+
+	while firstBishopIndex % 2 == secondBishopIndex % 2:
+		mainRow.shuffle()
+		firstBishopIndex = mainRow.find(PieceNames.BISHOP)
+		secondBishopIndex = mainRow.find(PieceNames.BISHOP, firstBishopIndex + 1)
 	
+	return mainRow
+
+func getRandomSecondaryRow(mainRow: Array[String]) -> Array[String]:
+	var secondaryRow: Array[String] = []
+
+	for i in mainRow.size():
+		if (mainRow[i] == PieceNames.BISHOP) or (mainRow[i] == PieceNames.KNIGHT):
+			secondaryRow.append(PieceNames.PAWN)
+		else:
+			secondaryRow.append(PieceNames.EMPTY)
+	
+	print("Secondary row: " + str(secondaryRow))
+	return secondaryRow
 
 func getAllPlayers() -> Array[Player]:
 	return players
