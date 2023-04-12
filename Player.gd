@@ -51,6 +51,15 @@ func init(initialName: String, initialPieceColor: Color, startingRow: int, piece
 
 		index += 1
 	
+	var pawnRow = startingRow + 1
+	if startingRow != 0:
+		pawnRow = startingRow - 1
+	
+	for i in piecesToPlay.size():
+		var piece := Piece.instantiate()
+		add_child(piece)
+		piece.init(PieceNames.PAWN, Vector2i(i, pawnRow), pieceColor)
+		pieces.append(piece)
 
 func _ready():
 	pass

@@ -8,7 +8,7 @@ var players: Array[Player]
 
 var currentPlayerIndex: int
 
-var defaultPieces: Array[String] = [PieceNames.PAWN, PieceNames.KNIGHT, PieceNames.ROOK, PieceNames.BISHOP, PieceNames.QUEEN, PieceNames.ROOK, PieceNames.BISHOP, PieceNames.KNIGHT, PieceNames.PAWN]
+var defaultPieces: Array[String] = [PieceNames.KNIGHT, PieceNames.ROOK, PieceNames.BISHOP, PieceNames.QUEEN, PieceNames.ROOK, PieceNames.BISHOP, PieceNames.KNIGHT]
 
 var currentRoll = 0
 
