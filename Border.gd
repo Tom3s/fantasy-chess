@@ -6,9 +6,9 @@ const BORDER_SIZE = 128
 func _ready():
 	polygon = [
 		Vector2(-BORDER_SIZE, -BORDER_SIZE),
-		Vector2(-BORDER_SIZE, GlobalVariables.BOARD_WIDTH * GlobalVariables.GRID_SIZE + BORDER_SIZE),
-		Vector2(GlobalVariables.BOARD_HEIGHT * GlobalVariables.GRID_SIZE + BORDER_SIZE, GlobalVariables.BOARD_WIDTH * GlobalVariables.GRID_SIZE + BORDER_SIZE),
-		Vector2(GlobalVariables.BOARD_HEIGHT * GlobalVariables.GRID_SIZE + BORDER_SIZE, -BORDER_SIZE)
+		Vector2(-BORDER_SIZE, GlobalVariables.BOARD_HEIGHT * GlobalVariables.GRID_SIZE + BORDER_SIZE),
+		Vector2(GlobalVariables.BOARD_WIDTH * GlobalVariables.GRID_SIZE + BORDER_SIZE, GlobalVariables.BOARD_HEIGHT * GlobalVariables.GRID_SIZE + BORDER_SIZE),
+		Vector2(GlobalVariables.BOARD_WIDTH * GlobalVariables.GRID_SIZE + BORDER_SIZE, -BORDER_SIZE)
 	]
 	pass # Replace with function body.
 
