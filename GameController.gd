@@ -17,20 +17,17 @@ signal waitingForRoll()
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	# player1
-	# var player1Pieces = getRandomMainRow()
-	var empty: Array[String] = [PieceNames.EMPTY, PieceNames.EMPTY, PieceNames.EMPTY]
-	var player1Pieces: Array[String]= [PieceNames.PAWN, PieceNames.EMPTY, PieceNames.EMPTY]
+	var player1Pieces = getRandomMainRow()
 	var player := Player.instantiate()
 	add_child(player)
-	player.init("Pink", Color.MEDIUM_VIOLET_RED, 0, player1Pieces, empty)
+	player.init("Pink", Color.MEDIUM_VIOLET_RED, 0, player1Pieces, getRandomSecondaryRow(player1Pieces))
 	players.append(player)
 
 	# player2
-	# var player2Pieces = getRandomMainRow()
-	var player2Pieces: Array[String]= [PieceNames.EMPTY, PieceNames.EMPTY, PieceNames.PAWN]
+	var player2Pieces = getRandomMainRow()
 	player = Player.instantiate()
 	add_child(player)
-	player.init("Blue", Color.DEEP_SKY_BLUE, GlobalVariables.BOARD_HEIGHT - 1, player2Pieces, empty)
+	player.init("Blue", Color.DEEP_SKY_BLUE, GlobalVariables.BOARD_HEIGHT - 1, player2Pieces, getRandomSecondaryRow(player2Pieces))
 	players.append(player)
 
 	currentPlayerIndex = 0

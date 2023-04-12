@@ -4,7 +4,7 @@ class_name DebugScreen
 
 var debugRows: Array[Callable]
 
-var enabled: bool = true
+var enabled: bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
