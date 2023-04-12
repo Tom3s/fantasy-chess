@@ -132,9 +132,13 @@ func onPlayer_turnEnded():
 	var empty: Array[Vector2i] = [] 
 	mouseHover.setAttacks(null, empty)
 	mouseHover.clearText()
-	gameController.nextPlayer()
 	abilityButton.disabled = true
-	board.updateBorderColor(Color.from_string("#1b1b1b", Color(0, 0, 0, 0)))
+
+	if !gameController.isGameOver():
+		gameController.nextPlayer()
+		board.updateBorderColor(Color.from_string("#1b1b1b", Color(0, 0, 0, 0)))
+	
+	print("Observer: game is over")
 
 
 func onInputHandler_centerCameraPressed():

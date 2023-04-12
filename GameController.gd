@@ -109,3 +109,8 @@ func resetGame():
 		
 	_ready()
 
+func isGameOver() -> bool:
+	var player1RemainingPieces = getCurrentPlayer().pieces.size()
+	var player2RemainingPieces = getEnemyPlayer().pieces.size()
+
+	return (player1RemainingPieces * player2RemainingPieces) == 0
