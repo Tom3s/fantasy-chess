@@ -61,4 +61,6 @@ script = ExtResource("9_e7itl")
 [node name="Sound" type="AudioStreamPlayer2D" parent="."]
 unique_name_in_owner = true
 stream = ExtResource("10_b3cyn")
+max_distance = 1e+06
+attenuation = 1e-05
 script = ExtResource("11_kbygm")
