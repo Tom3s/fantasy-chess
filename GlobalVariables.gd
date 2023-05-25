@@ -4,10 +4,10 @@ extends Node2D
 # class_name GlobalVariables
 
 @export
-var GRID_SIZE = 256
+var GRID_SIZE: int = 256
 
-var BOARD_HEIGHT = 10
-var BOARD_WIDTH = 10
+var BOARD_HEIGHT: int = 10
+var BOARD_WIDTH: int = 10
 
 func setBoardDimensions(width, height) -> void:
 	BOARD_WIDTH = width

@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dhwg3qitra36w"]
+[gd_scene load_steps=14 format=3 uid="uid://dhwg3qitra36w"]
 
 [ext_resource type="Script" path="res://DebugScreen.gd" id="1_6akny"]
 [ext_resource type="PackedScene" uid="uid://c5nd1g44qt7ib" path="res://Dice.tscn" id="2_l6icf"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" path="res://UseAbilityButton.gd" id="5_s38pi"]
 [ext_resource type="Script" path="res://Observer.gd" id="6_dwiah"]
 [ext_resource type="Texture2D" uid="uid://qwo0pu1g0h0e" path="res://Sprites/light.png" id="8_vcwuj"]
+[ext_resource type="PackedScene" uid="uid://dhuxf1xjv4ex1" path="res://Lights.tscn" id="12_1uht4"]
 
 [sub_resource type="Environment" id="Environment_2qs0o"]
 
@@ -56,8 +57,8 @@ script = ExtResource("5_s38pi")
 
 [node name="Board" parent="." instance=ExtResource("3_sq1xj")]
 z_index = -2
-width = 9
-height = 9
+width = 5
+height = 6
 darkColor = Color(0, 0.192157, 0.192157, 1)
 lightColor = Color(0.682353, 0.866667, 0.988235, 1)
 
@@ -80,8 +81,10 @@ script = ExtResource("6_dwiah")
 environment = SubResource("Environment_2qs0o")
 
 [node name="Lights" type="Node2D" parent="WorldEnvironment"]
+visible = false
 
 [node name="PointLight2D" type="PointLight2D" parent="WorldEnvironment/Lights"]
+z_index = -1
 position = Vector2(502, 505)
 scale = Vector2(5, 5)
 color = Color(1, 0.584314, 0.4, 1)
@@ -120,3 +123,5 @@ scale = Vector2(6.01563, 6.01563)
 energy = 0.45
 shadow_enabled = true
 texture = ExtResource("8_vcwuj")
+
+[node name="Lights2" parent="WorldEnvironment" instance=ExtResource("12_1uht4")]
